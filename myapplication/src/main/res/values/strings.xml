@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Анализатор расходов</string>
+    <string name="title_newdkr">Создать</string>
+    <string name="title_kalendar">Каледнарь</string>
+    <string name="title_dohod">Конверты</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
