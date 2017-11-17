@@ -94,13 +94,13 @@ public class BoxAdapter extends BaseAdapter {
     public int getViewTypeCount() {
         return 2;
     }
-   // @Override
-   // public int getItemViewType(int position) {
+    @Override
+    public int getItemViewType(int position) {
 
 
 
-  //      return (contactList.get(position).getContactType() == ContactType.CONTACT_WITH_IMAGE) ? 0 : 1;
-  //  }
+        return (getProduct(position).id == 1) ? 0 : 1;
+    }
 
     // содержимое корзины
     ArrayList<Product> getBox() {
