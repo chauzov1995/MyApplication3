@@ -1,33 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ccc"
-    android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
 
-    <TextView
-        android:id="@+id/text4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="asdas das dad asdasdas"></TextView>
-
-    <Button
-        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="add" />
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="sekect" />
+        android:orientation="vertical">
 
-    <GridView
-        android:id="@+id/gvMain"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:horizontalSpacing="5dp"
-        android:numColumns="3"
-        android:verticalSpacing="5dp" />
+        <LinearLayout
+
+            android:id="@+id/llheight"
+            android:layout_width="match_parent"
+            android:layout_height="1500dp"
+            android:background="#ccc"
+            android:orientation="vertical">
+
+            <GridView
+                android:id="@+id/gvdoh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:verticalSpacing="5dp">
+
+
+            </GridView>
+
+            <GridView
+                android:id="@+id/gvrash"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:verticalSpacing="5dp" />
+
+            <GridView
+                android:id="@+id/gvzel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:verticalSpacing="5dp" />
+        </LinearLayout>
 </LinearLayout>
+</ScrollView>

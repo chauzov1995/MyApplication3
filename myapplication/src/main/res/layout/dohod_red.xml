@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Название дохода" />
+
+    <EditText
+        android:id="@+id/doh_red_komment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Сколько планируете получать?" />
+
+    <EditText
+        android:id="@+id/doh_red_summa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:ems="10"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/doh_red_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/colorPrimary"
+        android:text="Сохранить"
+        android:textColor="#ffffff" />
+    <Button
+        android:id="@+id/doh_del_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/colorDelete"
+        android:text="Удалить"
+        android:textColor="#ffffff" />
+</LinearLayout>
