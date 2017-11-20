@@ -4,6 +4,7 @@ package com.example.myapplication;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+        import android.content.Intent;
         import android.graphics.Color;
         import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -154,18 +155,25 @@ public class BoxAdapter extends BaseAdapter {
                 public void onClick(View r) {
 
 
+                //    Fragment f = new dohod_red();
+                //    Bundle bundle = new Bundle();
+                //    bundle.putInt("id", p.id);
+                 //   bundle.putInt("summa", p.suuma_doh);
+                 //   bundle.putString("komment", p.komment);
+               //     f.setArguments(bundle);
 
-                    Fragment f = new dohod_red();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("id", p.id);
-                    bundle.putInt("summa", p.suuma_doh);
-                    bundle.putString("komment", p.komment);
-                    f.setArguments(bundle);
 
-                    FragmentTransaction fTrans = getactivity.getFragmentManager().beginTransaction();
-                    fTrans.replace(R.id.frgmCont, f);
-                    fTrans.addToBackStack(null);
-                    fTrans.commit();
+                    Intent intent = new Intent(getactivity, dohod_red.class);
+                 intent.putExtra("id", p.id);
+                    intent.putExtra("summa", p.suuma_doh);
+                    intent.putExtra("komment", p.komment);
+                    getactivity.startActivity(intent);
+
+
+                  //  FragmentTransaction fTrans = getactivity.getFragmentManager().beginTransaction();
+                  //  fTrans.replace(R.id.frgmCont, f);
+                  //  fTrans.addToBackStack(null);
+                   // fTrans.commit();
 
                 }
             });

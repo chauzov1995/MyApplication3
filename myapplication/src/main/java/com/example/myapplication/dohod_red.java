@@ -1,10 +1,14 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,23 +19,32 @@ import android.widget.TextView;
  * Created by nikita on 19.11.2017.
  */
 
-public class dohod_red extends Fragment {
-    View v;
+public class dohod_red extends AppCompatActivity {
+  Activity tecactivity;
     int id;
     EditText doh_red_komment, doh_red_summa;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-       v =inflater.inflate(R.layout.dohod_red, null);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.dohod_red);
 
-         doh_red_komment=(EditText) v.findViewById(R.id.doh_red_komment);
-         doh_red_summa=(EditText) v.findViewById(R.id.doh_red_summa);
-        Button doh_red_btn=(Button) v.findViewById(R.id.doh_red_btn);
-        Button doh_del_btn=(Button) v.findViewById(R.id.doh_del_btn);
-         id=getArguments().getInt("id");
 
-       doh_red_komment.setText(getArguments().getString("komment")); //NULL POINTER EXCEPTION
-        doh_red_summa.setText(Integer.toString(getArguments().getInt("summa"))); //NULL POINTER EXCEPTION
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        tecactivity=this;
+         doh_red_komment=(EditText) findViewById(R.id.doh_red_komment);
+         doh_red_summa=(EditText) findViewById(R.id.doh_red_summa);
+        Button doh_red_btn=(Button) findViewById(R.id.doh_red_btn);
+        Button doh_del_btn=(Button) findViewById(R.id.doh_del_btn);
+
+
+
+         id= getIntent().getIntExtra("id", 0);
+
+       doh_red_komment.setText(getIntent().getStringExtra("komment"));
+        doh_red_summa.setText(Integer.toString(getIntent().getIntExtra("summa",0))); //NULL POINTER EXCEPTION
 
      //   Bundle bundle = this.getArguments();
    //     doh_red_komment.setText(bundle.getString("komment"));
@@ -40,7 +53,7 @@ public class dohod_red extends Fragment {
         doh_red_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
 
-                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(getActivity());
+                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(tecactivity);
                 ContentValues cv = new ContentValues();
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -52,9 +65,9 @@ public class dohod_red extends Fragment {
                 int updCount = db.update("an_dohod", cv, "id = ?",
                         new String[] { Integer.toString(id) });
 
-                MainActivity.loadcart(getActivity());
-                getActivity().onBackPressed();// возврат на предыдущий activity
 
+              // onBackPressed();// возврат на предыдущий activity
+               finish();
 
             }
         });
@@ -63,7 +76,7 @@ public class dohod_red extends Fragment {
             public void onClick(View r) {
 
 
-                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(getActivity());
+                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(tecactivity);
                 ContentValues cv = new ContentValues();
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -75,14 +88,28 @@ public class dohod_red extends Fragment {
                 int updCount = db.update("an_dohod", cv, "id = ?",
                         new String[] { Integer.toString(id) });
 
-                MainActivity.loadcart(getActivity());
-                getActivity().onBackPressed();// возврат на предыдущий activity
+
+
+                finish();
+               // onBackPressed();// возврат на предыдущий activity
 
 
 
 
             }
         });
-        return v;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        int id =item.getItemId();
+
+        if(id==android.R.id.home){
+
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

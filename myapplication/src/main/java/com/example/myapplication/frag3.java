@@ -12,15 +12,32 @@ import android.widget.LinearLayout;
 public class frag3 extends Fragment {
 
 
-
+    View v;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.frag4, null);
+         v = inflater.inflate(R.layout.frag4, null);
 
 
+
+
+
+
+
+
+        return v;
+    }
+
+
+
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        MainActivity.loadcart(getActivity());
 
 
 
@@ -37,11 +54,11 @@ public class frag3 extends Fragment {
         int size_gv_doh=(int)Math.ceil(((double)MainActivity.products_doh.size())/3);
         int size_gv_rash= (int)Math.ceil(((double)MainActivity.products_rash.size())/3);
         int size_gv_zel=(int)Math.ceil(((double)MainActivity.products_zel.size())/3);
-int vsegoheight=(size_gv_zel+size_gv_doh+size_gv_rash)*135+5;
-            LinearLayout llheight = (LinearLayout) v.findViewById(R.id.llheight);
-       ViewGroup.LayoutParams params = llheight.getLayoutParams();
-     int pixels = (int) (vsegoheight * scale + 0.5f);
-     params.height = pixels; // или в пикселях
+        int vsegoheight=(size_gv_zel+size_gv_doh+size_gv_rash)*135+5;
+        LinearLayout llheight = (LinearLayout) v.findViewById(R.id.llheight);
+        ViewGroup.LayoutParams params = llheight.getLayoutParams();
+        int pixels = (int) (vsegoheight * scale + 0.5f);
+        params.height = pixels; // или в пикселях
         llheight.setLayoutParams(params);
 
 
@@ -50,16 +67,7 @@ int vsegoheight=(size_gv_zel+size_gv_doh+size_gv_rash)*135+5;
         gvrash.setAdapter(boxAdapter2);
         gvzel.setAdapter(boxAdapter3);
 
-
-
-
-        return v;
     }
-
-
-
-
-
 
 
 

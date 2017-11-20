@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,10 +15,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     public  static ArrayList<Product> products_zel = new ArrayList<Product>();
     DBHelper dbHelper;
     BoxAdapter boxAdapter;
+
+
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -84,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         frag2 = new frag2();
 
-        loadcart(this);
+
         frag3 = new frag3();
 
 
@@ -94,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
     }
+
 
 
     public static void loadcart(Context context){
@@ -153,12 +159,15 @@ switch (c.getInt(name_dohod)){
 
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-
-
-
-
-
+      //  loadcart(this);
+        frag3 = new frag3();
+             Toast.makeText(getApplicationContext(),
+                   "Пора покормить кота!", Toast.LENGTH_SHORT).show();
+    }
 
 
 
