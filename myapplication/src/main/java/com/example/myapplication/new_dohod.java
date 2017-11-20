@@ -1,10 +1,13 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,26 +17,33 @@ import android.widget.EditText;
  * Created by nikita on 19.11.2017.
  */
 
-public class new_dohod extends Fragment {
-    View v;
+public class new_dohod extends AppCompatActivity {
+
     int name_dohod;
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.new_dohod, null);
+    Activity tecactivity;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.new_dohod);
 
-         name_dohod=getArguments().getInt("name_dohod");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        tecactivity=this;
+        name_dohod= getIntent().getIntExtra("name_dohod", 0);
 
 
-        Button button5=(Button) v.findViewById(R.id.button5);
+
+        Button button5=(Button) findViewById(R.id.button5);
         button5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
-                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(getActivity());
+                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(tecactivity);
                 ContentValues cv = new ContentValues();
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 
-                EditText editText4=(EditText) v.findViewById(R.id.editText4);
-                EditText editText5=(EditText) v.findViewById(R.id.editText5);
+                EditText editText4=(EditText) findViewById(R.id.editText4);
+                EditText editText5=(EditText) findViewById(R.id.editText5);
 
                 cv.put("id_clienta", 1);
                 cv.put("name_dohod", name_dohod);
@@ -46,15 +56,25 @@ public class new_dohod extends Fragment {
                 // вставляем запись и получаем ее ID
                 long rowID = db.insert("an_dohod", null, cv);
 
-                MainActivity.loadcart(getActivity());
-                getActivity().onBackPressed();// возврат на предыдущий activity
-
+            //    MainActivity.loadcart(tecactivity);
+             //   tecactivity.onBackPressed();// возврат на предыдущий activity
+                finish();
             }
         });
-        return v;
+
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
 
+        int id =item.getItemId();
+
+        if(id==android.R.id.home){
+
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
 }

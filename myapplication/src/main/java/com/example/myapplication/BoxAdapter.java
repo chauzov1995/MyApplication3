@@ -80,7 +80,7 @@ public class BoxAdapter extends BaseAdapter {
             tvText3.setOnClickListener(new View.OnClickListener() {
                  public void onClick(View r) {
 
-
+/*
                      Fragment f = new new_dohod();
                      Bundle bundle = new Bundle();
                                        bundle.putInt("name_dohod", p.name_doh);
@@ -92,7 +92,11 @@ public class BoxAdapter extends BaseAdapter {
                      fTrans.addToBackStack(null);
                  //    fTrans.setRetainInstance(true);
                      fTrans.commit();
+*/
 
+                     Intent intent = new Intent(getactivity, new_dohod.class);
+                                  intent.putExtra("name_dohod", p.name_doh);
+                     getactivity.startActivity(intent);
 /*
 
                      ContentValues cv = new ContentValues();

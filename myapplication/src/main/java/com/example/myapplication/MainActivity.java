@@ -1,35 +1,32 @@
 package com.example.myapplication;
 
-import android.app.Fragment;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.GridView;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     FragmentTransaction fTrans;
     com.example.myapplication.frag2 frag2;
-    com.example.myapplication.frag3 frag3;
+    fragment_dohod fragment_dohod;
     new_dkr New_dkr;
   public  static ArrayList<Product> products_doh = new ArrayList<Product>();
     public  static ArrayList<Product> products_rash = new ArrayList<Product>();
@@ -47,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-            fTrans = getFragmentManager().beginTransaction();
+
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     fTrans.replace(R.id.frgmCont, New_dkr);
@@ -66,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    fTrans.replace(R.id.frgmCont, frag3);
+                    fTrans.replace(R.id.frgmCont, fragment_dohod);
                     fTrans.addToBackStack(null);
                     fTrans.commit();
                     return true;
@@ -88,19 +85,22 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        frag2 = new frag2();
+            frag2 = new frag2();
+            fragment_dohod = new fragment_dohod();
+            New_dkr = new new_dkr();
+dbHelper = new DBHelper(this);
 
 
-        frag3 = new frag3();
+        fTrans = getFragmentManager().beginTransaction();
+        fTrans.replace(R.id.frgmCont, New_dkr);
+        fTrans.addToBackStack(null);
+       fTrans.commit();
 
-
-
-        New_dkr = new new_dkr();
-        dbHelper = new DBHelper(this);
 
 
 
     }
+
 
 
 
@@ -164,7 +164,7 @@ switch (c.getInt(name_dohod)){
         super.onResume();
 
       //  loadcart(this);
-        frag3 = new frag3();
+        fragment_dohod = new fragment_dohod();
              Toast.makeText(getApplicationContext(),
                    "Пора покормить кота!", Toast.LENGTH_SHORT).show();
     }
@@ -208,8 +208,21 @@ switch (c.getInt(name_dohod)){
                     "  `komment` varchar(255) NOT NULL,\n" +
                     "  `visible` int(11) NOT NULL ,\n" +
                     "  `postoyan` int(11) NOT NULL\n" +
-
-                    ");" );
+                    ");" +
+                    "CREATE TABLE `an_dkr_hist` (\n" +
+                    "  `id` int(11) NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+                    "  `id_clienta` int(11) NOT NULL,\n" +
+                    "  `otkuda` int(11) NOT NULL,\n" +
+                    "  `kuda` int(11) NOT NULL,\n" +
+                    "  `summa` decimal(10,0) NOT NULL,\n" +
+                    "  `komment` varchar(255) NOT NULL,\n" +
+                    "  `data_fakt` varchar(255) NOT NULL,\n" +
+                    "  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
+                    "  `visible` int(11) NOT NULL,\n" +
+                    "  `postoyan` int(11) NOT NULL,\n" +
+                    "  `name_dohod` int(11) NOT NULL\n" +
+                    ");"
+            );
 
             Log.d("myLogs", "--- onCreate database ---");
         }

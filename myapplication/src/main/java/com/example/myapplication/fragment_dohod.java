@@ -2,14 +2,13 @@ package com.example.myapplication;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 
-public class frag3 extends Fragment {
+public class fragment_dohod extends Fragment {
 
 
     View v;
@@ -18,7 +17,7 @@ public class frag3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         v = inflater.inflate(R.layout.frag4, null);
+         v = inflater.inflate(R.layout.fragment_dohod, null);
 
 
 
