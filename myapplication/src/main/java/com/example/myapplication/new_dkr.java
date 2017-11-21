@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -22,14 +23,15 @@ import java.util.Calendar;
 public class new_dkr extends Fragment {
 
     TextView  textView3;
+    View v;
     Calendar dateAndTime= Calendar.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v= inflater.inflate(R.layout.new_dkr, null);
+         v= inflater.inflate(R.layout.new_dkr, null);
 
           textView3  =((TextView) v.findViewById(R.id.textView3));
-       Button button  =((Button) v.findViewById(R.id.button));
+      // Button button  =((Button) v.findViewById(R.id.button));
 
 
         setInitialDateTime();
@@ -72,7 +74,23 @@ return v;
 
 
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
 
+
+        MainActivity.load_dkr_cart(getActivity());
+
+
+
+        dkr_konv_adapter  boxAdapter1 = new dkr_konv_adapter(getActivity(), MainActivity.dkr_kart, getActivity());
+     // настраиваем список
+        GridView dkr_view = (GridView) v.findViewById(R.id.dkr_view);
+        dkr_view.setAdapter(boxAdapter1);
+
+
+    }
 
 
 

@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     com.example.myapplication.frag2 frag2;
     fragment_dohod fragment_dohod;
     new_dkr New_dkr;
+    public  static ArrayList<Product> dkr_kart = new ArrayList<Product>();
   public  static ArrayList<Product> products_doh = new ArrayList<Product>();
     public  static ArrayList<Product> products_rash = new ArrayList<Product>();
     public  static ArrayList<Product> products_zel = new ArrayList<Product>();
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-
+            fTrans = getFragmentManager().beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     fTrans.replace(R.id.frgmCont, New_dkr);
@@ -84,14 +85,14 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-
+        fTrans = getFragmentManager().beginTransaction();
             frag2 = new frag2();
             fragment_dohod = new fragment_dohod();
             New_dkr = new new_dkr();
 dbHelper = new DBHelper(this);
 
 
-        fTrans = getFragmentManager().beginTransaction();
+
         fTrans.replace(R.id.frgmCont, New_dkr);
         fTrans.addToBackStack(null);
        fTrans.commit();
@@ -159,6 +160,50 @@ switch (c.getInt(name_dohod)){
 
 
     }
+
+
+    public static void load_dkr_cart(Context context){
+
+        DBHelper dbHelper = new DBHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        dkr_kart.clear();
+
+
+        // делаем запрос всех данных из таблицы mytable, получаем Cursor
+        Cursor c = db.query("an_dohod", null, "visible == ?", new String[] { "0" }, null, null, null);
+
+        // ставим позицию курсора на первую строку выборки
+        // если в выборке нет строк, вернется false
+        if (c.moveToFirst()) {
+
+            // определяем номера столбцов по имени в выборке
+            int id = c.getColumnIndex("id");
+            int summa_dohod = c.getColumnIndex("summa_dohod");
+            int summa_fakt = c.getColumnIndex("summa_fakt");
+            int komment = c.getColumnIndex("komment");
+            int name_dohod = c.getColumnIndex("name_dohod");
+
+            do {
+
+
+                        dkr_kart.add(new Product(c.getString(komment), c.getInt(summa_dohod),
+                                c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0));
+
+
+                // переход на следующую строку
+                // а если следующей нет (текущая - последняя), то false - выходим из цикла
+            } while (c.moveToNext());
+        }
+
+
+        c.close();
+
+
+
+    }
+
+
+
     @Override
     protected void onResume() {
         super.onResume();

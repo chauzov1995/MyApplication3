@@ -63,15 +63,22 @@ public class dkr_konv_adapter extends BaseAdapter {
         // используем созданные, но не используемые view
         View view = convertView;
 
-
+        final Product p = getProduct(position);
 
 
             if (view == null) {
-                view = lInflater.inflate(R.layout.item_plus, parent, false);
+                view = lInflater.inflate(R.layout.item_dkr, parent, false);
             }
-            TextView tvText3=  (TextView) view.findViewById(R.id.tvText3);
-
-
+            Button dkr_item_btn=  (Button) view.findViewById(R.id.dkr_item_btn);
+        dkr_item_btn.setText(p.komment);
+switch (p.name_doh) {
+        case 1:
+        dkr_item_btn.setBackgroundColor(Color.parseColor("#99cc55")) ;
+        break;
+        case 2:
+        dkr_item_btn.setBackgroundColor(Color.parseColor("#ff9966"));
+        break;
+}
         return view;
     }
 
