@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -81,6 +82,7 @@ return v;
 
 
         MainActivity.load_dkr_cart(getActivity());
+        MainActivity.loadhist(getActivity());
 
 
 
@@ -88,6 +90,11 @@ return v;
      // настраиваем список
         GridView dkr_view = (GridView) v.findViewById(R.id.dkr_view);
         dkr_view.setAdapter(boxAdapter1);
+
+        history_adapter  boxAdapter2 = new history_adapter(getActivity(), MainActivity.history, getActivity());
+        // настраиваем список
+        ListView history = (ListView) v.findViewById(R.id.history);
+        history.setAdapter(boxAdapter2);
 
 
     }

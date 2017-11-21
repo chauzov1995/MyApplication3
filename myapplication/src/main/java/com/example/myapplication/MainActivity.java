@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
   public  static ArrayList<Product> products_doh = new ArrayList<Product>();
     public  static ArrayList<Product> products_rash = new ArrayList<Product>();
     public  static ArrayList<Product> products_zel = new ArrayList<Product>();
+    public  static ArrayList<History> history = new ArrayList<History>();
     DBHelper dbHelper;
     BoxAdapter boxAdapter;
 
@@ -170,7 +171,10 @@ switch (c.getInt(name_dohod)){
 
 
         // делаем запрос всех данных из таблицы mytable, получаем Cursor
-        Cursor c = db.query("an_dohod", null, "visible == ?", new String[] { "0" }, null, null, null);
+        Cursor c = db.query("an_dohod", null,
+                "visible == ? AND (name_dohod == ? OR name_dohod == ?)",
+                new String[] { String.valueOf(0), String.valueOf(1),String.valueOf(2)},
+                null, null, "name_dohod DESC");
 
         // ставим позицию курсора на первую строку выборки
         // если в выборке нет строк, вернется false
@@ -201,6 +205,53 @@ switch (c.getInt(name_dohod)){
 
 
     }
+
+
+    public static void loadhist(Context context){
+
+        DBHelper dbHelper = new DBHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        history.clear();
+
+
+        // делаем запрос всех данных из таблицы mytable, получаем Cursor
+        Cursor c = db.query("an_dkr_hist", null,
+                "visible == ? AND (name_dohod == ? OR name_dohod == ?)",
+                new String[] { String.valueOf(0), String.valueOf(1),String.valueOf(2)},
+                null, null, "name_dohod DESC");
+
+        // ставим позицию курсора на первую строку выборки
+        // если в выборке нет строк, вернется false
+        if (c.moveToFirst()) {
+
+            // определяем номера столбцов по имени в выборке
+            int id = c.getColumnIndex("id");
+            int summa = c.getColumnIndex("summa");
+
+            int komment = c.getColumnIndex("komment");
+            int kuda = c.getColumnIndex("kuda");
+            int data_fakt = c.getColumnIndex("data_fakt");
+           // int name_dohod = c.getColumnIndex("name_dohod");
+
+            do {
+
+
+                history.add(new History(c.getInt(id), c.getString(komment), c.getInt(summa),
+                       c.getString(data_fakt), c.getInt(kuda)));
+
+
+                // переход на следующую строку
+                // а если следующей нет (текущая - последняя), то false - выходим из цикла
+            } while (c.moveToNext());
+        }
+
+
+        c.close();
+
+
+
+    }
+
 
 
 
@@ -253,16 +304,15 @@ switch (c.getInt(name_dohod)){
                     "  `komment` varchar(255) NOT NULL,\n" +
                     "  `visible` int(11) NOT NULL ,\n" +
                     "  `postoyan` int(11) NOT NULL\n" +
-                    ");" +
-                    "CREATE TABLE `an_dkr_hist` (\n" +
-                    "  `id` int(11) NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+                    ");");
+                    db.execSQL(" CREATE TABLE `an_dkr_hist` (\n" +
+                    "  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
                     "  `id_clienta` int(11) NOT NULL,\n" +
-                    "  `otkuda` int(11) NOT NULL,\n" +
                     "  `kuda` int(11) NOT NULL,\n" +
                     "  `summa` decimal(10,0) NOT NULL,\n" +
                     "  `komment` varchar(255) NOT NULL,\n" +
                     "  `data_fakt` varchar(255) NOT NULL,\n" +
-                    "  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
+                   "  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
                     "  `visible` int(11) NOT NULL,\n" +
                     "  `postoyan` int(11) NOT NULL,\n" +
                     "  `name_dohod` int(11) NOT NULL\n" +
@@ -301,5 +351,7 @@ switch (c.getInt(name_dohod)){
     }
 
 */
+
+
 }
 

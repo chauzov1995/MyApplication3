@@ -3,8 +3,10 @@ package com.example.myapplication;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.myapplication.MainActivity.DBHelper;
@@ -79,6 +82,45 @@ switch (p.name_doh) {
         dkr_item_btn.setBackgroundColor(Color.parseColor("#ff9966"));
         break;
 }
+
+        dkr_item_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View r) {
+
+                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(getactivity);
+                ContentValues cv = new ContentValues();
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+
+                EditText editText=(EditText) getactivity.findViewById(R.id.editText);
+                EditText editText2=(EditText) getactivity.findViewById(R.id.editText2);
+
+
+
+
+
+                cv.put("id_clienta", 1);
+                cv.put("kuda", p.id);
+                cv.put("summa", Integer.parseInt(editText.getText().toString()));
+
+                cv.put("komment", editText2.getText().toString());
+                cv.put("data_fakt", "2017.11.21");
+               // cv.put("data", 0);
+                cv.put("visible", 0);
+                cv.put("postoyan", 0);
+                cv.put("name_dohod", p.name_doh);
+
+                // вставляем запись и получаем ее ID
+                long rowID = db.insert("an_dkr_hist", null, cv);
+
+                MainActivity.loadhist(getactivity);
+            }
+        });
+
+
+
+
+
+
         return view;
     }
 
