@@ -28,18 +28,19 @@ public class dkr_konv_adapter extends BaseAdapter {
     LayoutInflater lInflater;
     ArrayList<Product> objects;
     Activity getactivity;
-
+String date;
     com.example.myapplication.new_dohod new_Dohod;
 
 
     DBHelper dbHelper;
 
-    dkr_konv_adapter(Context context, ArrayList<Product> products, Activity _getactivity) {
+    dkr_konv_adapter(Context context, ArrayList<Product> products, Activity _getactivity, String _date) {
         ctx = context;
         objects = products;
         lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         getactivity=_getactivity;
+        date=_date;
     }
 
     // кол-во элементов
@@ -103,7 +104,7 @@ switch (p.name_doh) {
                 cv.put("summa", Integer.parseInt(editText.getText().toString()));
 
                 cv.put("komment", editText2.getText().toString());
-                cv.put("data_fakt", "2017.11.21");
+                cv.put("data_fakt", date);
                // cv.put("data", 0);
                 cv.put("visible", 0);
                 cv.put("postoyan", 0);
@@ -112,7 +113,7 @@ switch (p.name_doh) {
                 // вставляем запись и получаем ее ID
                 long rowID = db.insert("an_dkr_hist", null, cv);
 
-                MainActivity.loadhist(getactivity);
+                getactivity.finish();
             }
         });
 

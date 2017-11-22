@@ -3,7 +3,10 @@ package com.example.myapplication;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -25,6 +29,7 @@ public class new_dkr extends Fragment {
 
     TextView  textView3;
     View v;
+    String date;
     Calendar dateAndTime= Calendar.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,6 +44,9 @@ public class new_dkr extends Fragment {
 
 
 
+        Toast.makeText(getActivity(),
+                date, Toast.LENGTH_SHORT).show();
+
 
         textView3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
@@ -52,14 +60,34 @@ public class new_dkr extends Fragment {
             });
 
 
+        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                  //      .setAction("Action", null).show();
+
+                Intent intent = new Intent(getActivity(), new_dkr_crea.class);
+
+               intent.putExtra("date", date);
+
+                startActivity(intent);
+            }
+        });
+
 return v;
     }
 
     private void setInitialDateTime() {
 
-        textView3.setText(DateUtils.formatDateTime(getActivity(),
+        textView3.setText( DateUtils.formatDateTime(getActivity(),
                 dateAndTime.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+
+        String[] datespl=DateUtils.formatDateTime(getActivity(), dateAndTime.getTimeInMillis(),
+                DateUtils.FORMAT_NUMERIC_DATE|DateUtils.FORMAT_SHOW_YEAR).split("/");
+        date=  datespl[2]+"."+datespl[0]+"."+datespl[1];
+
     }
 
 
@@ -81,15 +109,13 @@ return v;
         super.onResume();
 
 
-        MainActivity.load_dkr_cart(getActivity());
-        MainActivity.loadhist(getActivity());
+
+
+      MainActivity.loadhist(getActivity(),date);
 
 
 
-        dkr_konv_adapter  boxAdapter1 = new dkr_konv_adapter(getActivity(), MainActivity.dkr_kart, getActivity());
-     // настраиваем список
-        GridView dkr_view = (GridView) v.findViewById(R.id.dkr_view);
-        dkr_view.setAdapter(boxAdapter1);
+
 
         history_adapter  boxAdapter2 = new history_adapter(getActivity(), MainActivity.history, getActivity());
         // настраиваем список

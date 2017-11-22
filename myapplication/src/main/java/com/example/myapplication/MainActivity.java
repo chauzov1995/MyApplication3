@@ -207,7 +207,7 @@ switch (c.getInt(name_dohod)){
     }
 
 
-    public static void loadhist(Context context){
+    public static void loadhist(Context context, String date){
 
         DBHelper dbHelper = new DBHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -216,9 +216,9 @@ switch (c.getInt(name_dohod)){
 
         // делаем запрос всех данных из таблицы mytable, получаем Cursor
         Cursor c = db.query("an_dkr_hist", null,
-                "visible == ? AND (name_dohod == ? OR name_dohod == ?)",
-                new String[] { String.valueOf(0), String.valueOf(1),String.valueOf(2)},
-                null, null, "name_dohod DESC");
+                "visible == ? AND data_fakt == ?",
+                new String[] { String.valueOf(0), date},
+                null, null, "data DESC");
 
         // ставим позицию курсора на первую строку выборки
         // если в выборке нет строк, вернется false
@@ -261,8 +261,8 @@ switch (c.getInt(name_dohod)){
 
       //  loadcart(this);
         fragment_dohod = new fragment_dohod();
-             Toast.makeText(getApplicationContext(),
-                   "Пора покормить кота!", Toast.LENGTH_SHORT).show();
+           //  Toast.makeText(getApplicationContext(),
+          //         "Пора покормить кота!", Toast.LENGTH_SHORT).show();
     }
 
 

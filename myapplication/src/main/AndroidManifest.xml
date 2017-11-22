@@ -18,8 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".dohod_red" android:label="Редактируем"></activity>
-        <activity android:name=".new_dohod" android:label="Создаём"></activity>
+        <activity
+            android:name=".dohod_red"
+            android:label="Редактируем" />
+        <activity
+            android:name=".new_dohod"
+            android:label="Создаём" />
+        <activity android:name=".new_dkr_crea" />
     </application>
 
 </manifest>
