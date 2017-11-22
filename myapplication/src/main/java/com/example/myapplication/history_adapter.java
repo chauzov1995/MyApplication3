@@ -109,6 +109,8 @@ import java.util.ArrayList;
                     int updCount = db.update("an_dkr_hist", cv, "id = ?",
                             new String[] { Integer.toString(p.id) });
 
+                    //onResume();
+
 
                 }
             });

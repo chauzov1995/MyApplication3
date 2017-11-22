@@ -37,15 +37,31 @@ public class new_dkr extends Fragment {
          v= inflater.inflate(R.layout.new_dkr, null);
 
           textView3  =((TextView) v.findViewById(R.id.textView3));
-      // Button button  =((Button) v.findViewById(R.id.button));
-
+       Button button3  =((Button) v.findViewById(R.id.button3));
+        Button button6  =((Button) v.findViewById(R.id.button6));
 
         setInitialDateTime();
 
 
 
-        Toast.makeText(getActivity(),
-                date, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(),
+         //       date, Toast.LENGTH_SHORT).show();
+        button3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View r) {
+                dateAndTime.add(Calendar.DATE, -1);
+                setInitialDateTime();
+                onResume();
+
+            }
+        });
+        button6.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View r) {
+
+                dateAndTime.add(Calendar.DATE, +1);
+                setInitialDateTime();
+                onResume();
+            }
+        });
 
 
         textView3.setOnClickListener(new View.OnClickListener() {
@@ -83,10 +99,10 @@ return v;
         textView3.setText( DateUtils.formatDateTime(getActivity(),
                 dateAndTime.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
-
-        String[] datespl=DateUtils.formatDateTime(getActivity(), dateAndTime.getTimeInMillis(),
-                DateUtils.FORMAT_NUMERIC_DATE|DateUtils.FORMAT_SHOW_YEAR).split("/");
-        date=  datespl[2]+"."+datespl[0]+"."+datespl[1];
+       // int seconds = dateAndTime.get(Calendar.SECOND);
+       // date=DateUtils.formatDateTime(getActivity(), dateAndTime.getTimeInMillis(),
+            //    DateUtils.FORMAT_NUMERIC_DATE|DateUtils.FORMAT_SHOW_YEAR);
+        date= dateAndTime.get(Calendar.YEAR)+"."+(dateAndTime.get(Calendar.MONTH)+1)+"."+dateAndTime.get(Calendar.DAY_OF_MONTH);
 
     }
 
@@ -97,6 +113,7 @@ return v;
             dateAndTime.set(Calendar.MONTH, monthOfYear);
             dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             setInitialDateTime();
+            onResume();
         }
     };
 
@@ -117,10 +134,10 @@ return v;
 
 
 
-        history_adapter  boxAdapter2 = new history_adapter(getActivity(), MainActivity.history, getActivity());
+       history_adapter  boxAdapter2 = new history_adapter(getActivity(), MainActivity.history, getActivity());
         // настраиваем список
         ListView history = (ListView) v.findViewById(R.id.history);
-        history.setAdapter(boxAdapter2);
+       history.setAdapter(boxAdapter2);
 
 
     }

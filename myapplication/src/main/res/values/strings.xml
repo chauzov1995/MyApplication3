@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Анализатор расходов</string>
-    <string name="title_newdkr">Создать</string>
-    <string name="title_kalendar">Каледнарь</string>
+    <string name="title_newdkr">Календарь</string>
+    <string name="title_kalendar">Статистика</string>
     <string name="title_dohod">Конверты</string>
 
     <!-- TODO: Remove or change this placeholder text -->

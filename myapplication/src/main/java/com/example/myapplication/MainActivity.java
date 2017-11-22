@@ -1,8 +1,8 @@
 package com.example.myapplication;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
+import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,19 +13,17 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     FragmentTransaction fTrans;
-    com.example.myapplication.frag2 frag2;
+    statistics frag2;
     fragment_dohod fragment_dohod;
     new_dkr New_dkr;
     public  static ArrayList<Product> dkr_kart = new ArrayList<Product>();
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public  static ArrayList<History> history = new ArrayList<History>();
     DBHelper dbHelper;
     BoxAdapter boxAdapter;
-
+ static Activity getactivity;
 
 
 
@@ -79,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getactivity=this;
         setContentView(R.layout.activity_main);
 
       //  mTextMessage = (TextView) findViewById(R.id.message);
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         fTrans = getFragmentManager().beginTransaction();
-            frag2 = new frag2();
+            frag2 = new statistics();
             fragment_dohod = new fragment_dohod();
             New_dkr = new new_dkr();
 dbHelper = new DBHelper(this);
@@ -255,6 +255,8 @@ switch (c.getInt(name_dohod)){
 
 
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -317,10 +319,43 @@ switch (c.getInt(name_dohod)){
                     "  `postoyan` int(11) NOT NULL,\n" +
                     "  `name_dohod` int(11) NOT NULL\n" +
                     ");"
-            );
 
-            Log.d("myLogs", "--- onCreate database ---");
+
+            );
+            db.execSQL("CREATE TABLE `an_users` (\n" +
+                    "  `datareg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
+                    "  `dohod` decimal(10,0) NOT NULL,\n" +
+                    "  `rashod` decimal(10,0) NOT NULL,\n" +
+                    "  `zel` decimal(10,0) NOT NULL,\n" +
+                    "  `vsego_mes_potr` decimal(10,0) NOT NULL,\n" +
+                    "  `vsego_mes_zarab` int(11) NOT NULL,\n" +
+                    "  `balance` decimal(10,0) NOT NULL\n" +
+                                     ");");
+
+
+
+         ContentValues cv = new ContentValues();
+
+
+
+            cv.put("dohod", 0);
+            cv.put("rashod", 3);
+            cv.put("rashod", 0);
+            cv.put("zel", 0);
+            cv.put("vsego_mes_potr",0);
+            cv.put("vsego_mes_zarab", 0);
+            cv.put("balance", 0);
+
+            // вставляем запись и получаем ее ID
+            long rowID = db.insert("an_users", null, cv);
+
+            Toast.makeText(getactivity,
+                    Long.toString(rowID), Toast.LENGTH_SHORT).show();
         }
+
+
+
+
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

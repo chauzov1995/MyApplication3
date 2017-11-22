@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.GridView;
@@ -19,6 +20,9 @@ public class new_dkr_crea extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_dkr_crea);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
         String date= getIntent().getStringExtra("date");
@@ -38,6 +42,18 @@ public class new_dkr_crea extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        int id =item.getItemId();
+
+        if(id==android.R.id.home){
+
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
