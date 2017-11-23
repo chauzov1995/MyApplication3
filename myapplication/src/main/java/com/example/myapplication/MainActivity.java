@@ -339,7 +339,6 @@ switch (c.getInt(name_dohod)){
 
 
             cv.put("dohod", 0);
-            cv.put("rashod", 3);
             cv.put("rashod", 0);
             cv.put("zel", 0);
             cv.put("vsego_mes_potr",0);
