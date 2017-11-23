@@ -56,6 +56,27 @@ public class new_dohod extends AppCompatActivity {
                 // вставляем запись и получаем ее ID
                 long rowID = db.insert("an_dohod", null, cv);
 
+
+                cv.clear();
+
+                String vstavka="";
+                switch(name_dohod){
+                    case 1:
+                        vstavka="`dohod`=dohod+'"+editText5.getText()+"'";
+                        break;
+                    case 2:
+                       // if($postoyan_doh==1){
+                            vstavka="`rashod`=rashod+'"+editText5.getText()+"'";
+                      //  }
+                        break;
+                    case 3:
+                        vstavka="`zel`=zel+'"+editText5.getText()+"'";
+                        break;
+                }
+
+
+                db.execSQL("UPDATE `an_users` SET "+vstavka);
+
             //    MainActivity.loadcart(tecactivity);
              //   tecactivity.onBackPressed();// возврат на предыдущий activity
                 finish();
