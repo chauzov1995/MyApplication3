@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 /**
@@ -23,7 +24,7 @@ public class new_dohod extends AppCompatActivity {
     Activity tecactivity;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_dohod);
+        setContentView(R.layout.dohod_red);
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -34,7 +35,10 @@ public class new_dohod extends AppCompatActivity {
 
 
 
-        Button button5=(Button) findViewById(R.id.button5);
+
+
+
+        Button button5=(Button) findViewById(R.id.doh_red_btn);
         button5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
                 MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(tecactivity);
@@ -42,8 +46,11 @@ public class new_dohod extends AppCompatActivity {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 
-                EditText editText4=(EditText) findViewById(R.id.editText4);
-                EditText editText5=(EditText) findViewById(R.id.editText5);
+                EditText editText4=(EditText) findViewById(R.id.doh_red_komment);
+                EditText editText5=(EditText) findViewById(R.id.doh_red_summa);
+
+                int postoyan_post=0;
+                if(((CheckBox) findViewById(R.id.checkBox)).isChecked()) postoyan_post=1;
 
                 cv.put("id_clienta", 1);
                 cv.put("name_dohod", name_dohod);
@@ -51,7 +58,7 @@ public class new_dohod extends AppCompatActivity {
                 cv.put("summa_fakt", 0);
                 cv.put("komment", editText4.getText().toString());
                 cv.put("visible", 0);
-                cv.put("postoyan", 0);
+                cv.put("postoyan", postoyan_post);
 
                 // вставляем запись и получаем ее ID
                 long rowID = db.insert("an_dohod", null, cv);
@@ -65,9 +72,11 @@ public class new_dohod extends AppCompatActivity {
                         vstavka="`dohod`=dohod+'"+editText5.getText()+"'";
                         break;
                     case 2:
-                       // if($postoyan_doh==1){
+                        if(postoyan_post==1){
                             vstavka="`rashod`=rashod+'"+editText5.getText()+"'";
-                      //  }
+                       }else {
+                            vstavka="`rashod`=rashod";
+                                            }
                         break;
                     case 3:
                         vstavka="`zel`=zel+'"+editText5.getText()+"'";

@@ -135,12 +135,18 @@ public class BoxAdapter extends BaseAdapter {
 
             Button  button4=(Button) view.findViewById(R.id.button4);
 
+
             switch(p.name_doh){
                 case 1:
                     button4.setBackgroundColor(Color.parseColor("#99cc55"));
                         break;
                 case 2:
-                    button4.setBackgroundColor(Color.parseColor("#ff9966"));
+
+                    if(p.postoyan==1) {
+                        button4.setBackgroundColor(Color.parseColor("#bb9988"));
+                    }else{
+                        button4.setBackgroundColor(Color.parseColor("#ff9966"));
+                    }
                     break;
                 case 3:
                     button4.setBackgroundColor(Color.parseColor("#55bbbb"));
@@ -171,6 +177,8 @@ public class BoxAdapter extends BaseAdapter {
                  intent.putExtra("id", p.id);
                     intent.putExtra("summa", p.suuma_doh);
                     intent.putExtra("komment", p.komment);
+                    intent.putExtra("postoyan", p.postoyan);
+                    intent.putExtra("name_doh", p.name_doh);
                     getactivity.startActivity(intent);
 
 

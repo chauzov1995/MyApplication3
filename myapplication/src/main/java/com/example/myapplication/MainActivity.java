@@ -47,26 +47,31 @@ public class MainActivity extends AppCompatActivity {
             fTrans = getFragmentManager().beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+
+                    setTitle("Каледарь");
                     fTrans.replace(R.id.frgmCont, New_dkr);
+                    fTrans.addToBackStack(null);
+                    fTrans.commit();
+                    return true;
+                case R.id.navigation_notifications:
+                    // mTextMessage.setText(R.string.title_notifications);
+
+
+
+                    setTitle("Конверты");
+                    fTrans.replace(R.id.frgmCont, fragment_dohod);
                     fTrans.addToBackStack(null);
                     fTrans.commit();
                     return true;
                 case R.id.navigation_dashboard:
                   //  mTextMessage.setText(R.string.title_dashboard);
+
+                    setTitle("Статистика");
                     fTrans.replace(R.id.frgmCont, frag2);
                     fTrans.addToBackStack(null);
                     fTrans.commit();
                     return true;
-                case R.id.navigation_notifications:
-                   // mTextMessage.setText(R.string.title_notifications);
 
-
-
-
-                    fTrans.replace(R.id.frgmCont, fragment_dohod);
-                    fTrans.addToBackStack(null);
-                    fTrans.commit();
-                    return true;
             }
 
             return false;
@@ -85,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
+        setTitle("Каледарь");
         fTrans = getFragmentManager().beginTransaction();
             frag2 = new statistics();
             fragment_dohod = new fragment_dohod();
@@ -115,8 +120,7 @@ dbHelper = new DBHelper(this);
         products_zel.clear();
 
         // делаем запрос всех данных из таблицы mytable, получаем Cursor
-        Cursor c = db.query("an_dohod", null, "visible == ?", new String[] { "0" }, null, null, null);
-
+        Cursor c = db.rawQuery("select * from `an_dohod` Where visible==0", null);
         // ставим позицию курсора на первую строку выборки
         // если в выборке нет строк, вернется false
         if (c.moveToFirst()) {
@@ -127,21 +131,22 @@ dbHelper = new DBHelper(this);
             int summa_fakt = c.getColumnIndex("summa_fakt");
             int komment = c.getColumnIndex("komment");
             int name_dohod = c.getColumnIndex("name_dohod");
+            int postoyan = c.getColumnIndex("postoyan");
 
             do {
 
 switch (c.getInt(name_dohod)){
     case 1:
         products_doh.add(new Product(c.getString(komment), c.getInt(summa_dohod),
-                c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0));
+                c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0, c.getInt(postoyan)));
         break;
     case 2:
         products_rash.add(new Product(c.getString(komment), c.getInt(summa_dohod),
-                c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0));
+                c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0, c.getInt(postoyan)));
         break;
     case 3:
         products_zel.add(new Product(c.getString(komment), c.getInt(summa_dohod),
-                c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0));
+                c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0, c.getInt(postoyan)));
         break;
 }
 
@@ -151,11 +156,11 @@ switch (c.getInt(name_dohod)){
         }
 
         products_doh.add(new Product("Создать+", 0,
-                0, 0, 1, 1));
+                0, 0, 1, 1, 0));
         products_rash.add(new Product("Создать+", 0,
-                0, 0, 2, 1));
+                0, 0, 2, 1, 0));
         products_zel.add(new Product("Создать+", 0,
-                0, 0, 3, 1));
+                0, 0, 3, 1,0));
         c.close();
 
 
@@ -186,12 +191,13 @@ switch (c.getInt(name_dohod)){
             int summa_fakt = c.getColumnIndex("summa_fakt");
             int komment = c.getColumnIndex("komment");
             int name_dohod = c.getColumnIndex("name_dohod");
+            int postoyan = c.getColumnIndex("postoyan");
 
             do {
 
 
                         dkr_kart.add(new Product(c.getString(komment), c.getInt(summa_dohod),
-                                c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0));
+                                c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0, c.getInt(postoyan)));
 
 
                 // переход на следующую строку

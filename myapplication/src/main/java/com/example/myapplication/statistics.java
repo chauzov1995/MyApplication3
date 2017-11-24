@@ -41,11 +41,10 @@ public class statistics extends Fragment {
 
 
 
-        // делаем запрос всех данных из таблицы mytable, получаем Cursor
-        Cursor c = db.query("an_users", null,
-                null,
-                null,
-                null, null, null);
+
+
+        Cursor c = db.rawQuery("select * from `an_users`", null);
+
 
         // ставим позицию курсора на первую строку выборки
         // если в выборке нет строк, вернется false
@@ -54,15 +53,15 @@ public class statistics extends Fragment {
         Calendar calendar =  Calendar.getInstance();
         int maxDays = calendar.getActualMaximum( Calendar.DAY_OF_MONTH );
 
-            // определяем номера столбцов по имени в выборке
-            int dohod = c.getColumnIndex("dohod");
-            int rashod = c.getColumnIndex("rashod");
-            int zel = c.getColumnIndex("zel");
-            int vsego_mes_potr = c.getColumnIndex("vsego_mes_potr");
-           int vsego_mes_zarab = c.getColumnIndex("vsego_mes_zarab");
+        // определяем номера столбцов по имени в выборке
+        int dohod = c.getColumnIndex("dohod");
+        int rashod = c.getColumnIndex("rashod");
+        int zel = c.getColumnIndex("zel");
+        int vsego_mes_potr = c.getColumnIndex("vsego_mes_potr");
+        int vsego_mes_zarab = c.getColumnIndex("vsego_mes_zarab");
         int balance = c.getColumnIndex("balance");
         int limitmes=c.getInt(dohod)-c.getInt(rashod)-c.getInt(zel);
-int limitned=limitmes/maxDays*7;
+        int limitned=limitmes/maxDays*7;
 
         String[] names = {
                     "Баланс: "+c.getInt(balance),

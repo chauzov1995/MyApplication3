@@ -12,9 +12,10 @@
 
     <TextView
 
+        android:id="@+id/tb_red_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
+        android:layout_height="wrap_content"
         android:text="Название дохода" />
 
     <EditText
@@ -27,9 +28,10 @@
 
     <TextView
 
+        android:id="@+id/tb_red_summa"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
+        android:layout_height="wrap_content"
         android:text="Сколько планируете получать?" />
 
     <EditText
@@ -39,6 +41,12 @@
 
         android:ems="10"
         android:inputType="number" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Постоянный" />
 
     <Button
         android:id="@+id/doh_red_btn"
