@@ -1,20 +1,18 @@
 package com.example.myapplication;
 
         import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Context;
+        import android.content.Context;
         import android.content.Intent;
         import android.graphics.Color;
-        import android.os.Bundle;
-import android.view.LayoutInflater;
+        import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+        import android.widget.Toast;
 
-import com.example.myapplication.MainActivity.DBHelper;
+        import com.example.myapplication.MainActivity.DBHelper;
 
 import java.util.ArrayList;
 
@@ -102,7 +100,7 @@ public class BoxAdapter extends BaseAdapter {
                      ContentValues cv = new ContentValues();
                      SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                     cv.put("id_clienta", 1);
+
                      cv.put("name_dohod", 1);
                      cv.put("summa_dohod", 344);
                      cv.put("summa_fakt", 0);
@@ -118,6 +116,8 @@ public class BoxAdapter extends BaseAdapter {
                  }
 
             });
+
+
 
             // заполняем View в пункте списка данными из товаров: наименование, цена
             // и картинка
@@ -173,11 +173,7 @@ public class BoxAdapter extends BaseAdapter {
                //     f.setArguments(bundle);
 
 
-                    Intent intent = new Intent(getactivity, dohod_red.class);
-                 intent.putExtra("id", p.id);
-                    intent.putExtra("summa", p.suuma_doh);
-                    intent.putExtra("komment", p.komment);
-                    intent.putExtra("postoyan", p.postoyan);
+                    Intent intent = new Intent(getactivity, new_dkr_crea.class);
                     intent.putExtra("name_doh", p.name_doh);
                     getactivity.startActivity(intent);
 
@@ -187,6 +183,26 @@ public class BoxAdapter extends BaseAdapter {
                   //  fTrans.addToBackStack(null);
                    // fTrans.commit();
 
+                }
+            });
+
+
+            button4.setOnLongClickListener(new View.OnLongClickListener() {
+                public boolean onLongClick(View r) {
+
+
+
+
+                    Intent intent = new Intent(getactivity, dohod_red.class);
+                    intent.putExtra("id", p.id);
+                    intent.putExtra("summa", p.suuma_doh);
+                    intent.putExtra("komment", p.komment);
+                    intent.putExtra("postoyan", p.postoyan);
+                    intent.putExtra("name_doh", p.name_doh);
+                    getactivity.startActivity(intent);
+
+
+                    return true;
                 }
             });
 

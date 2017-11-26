@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -105,6 +106,11 @@ dbHelper = new DBHelper(this);
 
 
 
+
+
+     //   Intent intent = new Intent(getactivity, TABBED.class);
+
+     //   getactivity.startActivity(intent);
 
     }
 
@@ -305,7 +311,6 @@ switch (c.getInt(name_dohod)){
 
             db.execSQL("CREATE TABLE `an_dohod` (\n" +
                     "  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
-                    "  `id_clienta` int(11) NOT NULL,\n" +
                     "  `name_dohod` int(11) NOT NULL ,\n" +
                     "  `summa_dohod` decimal(11,0) NOT NULL,\n" +
                     "  `summa_fakt` decimal(10,0) NOT NULL,\n" +
@@ -315,7 +320,6 @@ switch (c.getInt(name_dohod)){
                     ");");
                     db.execSQL(" CREATE TABLE `an_dkr_hist` (\n" +
                     "  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
-                    "  `id_clienta` int(11) NOT NULL,\n" +
                     "  `kuda` int(11) NOT NULL,\n" +
                     "  `summa` decimal(10,0) NOT NULL,\n" +
                     "  `komment` varchar(255) NOT NULL,\n" +
@@ -340,22 +344,45 @@ switch (c.getInt(name_dohod)){
 
 
 
-         ContentValues cv = new ContentValues();
+            db.execSQL("INSERT INTO `an_users`" +
+                    "( `dohod`, `rashod`, `zel`, `vsego_mes_potr`, `vsego_mes_zarab`, `balance`) VALUES" +
+                    " (0,0,0,0,0,0)");
 
 
 
-            cv.put("dohod", 0);
-            cv.put("rashod", 0);
-            cv.put("zel", 0);
-            cv.put("vsego_mes_potr",0);
-            cv.put("vsego_mes_zarab", 0);
-            cv.put("balance", 0);
 
-            // вставляем запись и получаем ее ID
-            long rowID = db.insert("an_users", null, cv);
 
-            Toast.makeText(getactivity,
-                    Long.toString(rowID), Toast.LENGTH_SHORT).show();
+            db.execSQL("INSERT INTO `an_dohod`" +
+                    "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`, `postoyan`) VALUES" +
+                    " (1,0,0,'Доход',0,0)");
+            db.execSQL("INSERT INTO `an_dohod`" +
+                    "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`, `postoyan`) VALUES" +
+                    " (2,0,0,'Продукты',0,0)");
+            db.execSQL("INSERT INTO `an_dohod`" +
+                    "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`, `postoyan`) VALUES" +
+                    " (2,0,0,'Еда вне дома',0,0)");
+            db.execSQL("INSERT INTO `an_dohod`" +
+                    "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`, `postoyan`) VALUES" +
+                    " (2,0,0,'Транспорт',0,0)");
+            db.execSQL("INSERT INTO `an_dohod`" +
+                    "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`, `postoyan`) VALUES" +
+                    " (2,0,0,'Покупки',0,0)");
+            db.execSQL("INSERT INTO `an_dohod`" +
+                    "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`, `postoyan`) VALUES" +
+                    " (2,0,0,'Дом. хоз-во',0,0)");
+            db.execSQL("INSERT INTO `an_dohod`" +
+                    "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`, `postoyan`) VALUES" +
+                    " (2,0,0,'Развлечения',0,0)");
+            db.execSQL("INSERT INTO `an_dohod`" +
+                    "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`, `postoyan`) VALUES" +
+                    " (2,0,0,'Услуги',0,0)");
+            db.execSQL("INSERT INTO `an_dohod`" +
+                    "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`, `postoyan`) VALUES" +
+                    " (3,0,0,'Цель',0,0)");
+
+
+            //   Toast.makeText(getactivity,
+          //          Long.toString(rowID), Toast.LENGTH_SHORT).show();
         }
 
 

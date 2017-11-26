@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.myapplication.MainActivity.DBHelper;
@@ -74,49 +75,30 @@ import java.util.ArrayList;
             }
             TextView textView8=  (TextView) view.findViewById(R.id.textView8);
             TextView textView9=  (TextView) view.findViewById(R.id.textView9);
-            Button button=  (Button) view.findViewById(R.id.button);
+            LinearLayout histitem=  (LinearLayout) view.findViewById(R.id.histitem);
+
+           // Button button=  (Button) view.findViewById(R.id.button);
             textView8.setText(p.komment);
             textView9.setText(p.suuma+ " р.");
 
-            /*
-            switch (p.) {
-                case 1:
-                    dkr_item_btn.setBackgroundColor(Color.parseColor("#99cc55")) ;
-                    break;
-                case 2:
-                    dkr_item_btn.setBackgroundColor(Color.parseColor("#ff9966"));
-                    break;
-            }
-&8*&^*&*/
-            button.setOnClickListener(new View.OnClickListener() {
+
+            histitem.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View r) {
 
-                    MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(getactivity);
-                    ContentValues cv = new ContentValues();
-                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                    Intent intent = new Intent(getactivity, red_dkr.class);
 
 
-                //    EditText editText=(EditText) getactivity.findViewById(R.id.editText);
-             //       EditText editText2=(EditText) getactivity.findViewById(R.id.editText2);
+                    intent.putExtra("suuma", p.suuma);
+                    intent.putExtra("komment", p.komment);
+                    intent.putExtra("id", p.id);
+                    intent.putExtra("data_fact", p.data_fact);
 
 
-
-
-                    // подготовим значения для обновления
-                    cv.put("visible", 1);
-
-                    // обновляем по id
-                    int updCount = db.update("an_dkr_hist", cv, "id = ?",
-                            new String[] { Integer.toString(p.id) });
-
-                    //onResume();
-
+                    getactivity.startActivity(intent);
 
                 }
             });
-
-
-
 
 
 

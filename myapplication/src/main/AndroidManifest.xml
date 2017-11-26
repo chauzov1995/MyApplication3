@@ -24,7 +24,16 @@
         <activity
             android:name=".new_dohod"
             android:label="Создаём" />
-        <activity android:name=".new_dkr_crea"  android:label="На что потратились?"/>
+        <activity
+            android:name=".new_dkr_crea"
+            android:label="На что потратились?" />
+        <activity
+            android:name=".red_dkr"
+            android:label="На что потратились?" />
+        <activity
+            android:name=".TABBED"
+            android:label="@string/title_activity_tabbed"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import android.widget.TextView;
 import com.example.myapplication.MainActivity.DBHelper;
 
 import java.util.ArrayList;
-
+import java.util.Calendar;
 
 
 public class dkr_konv_adapter extends BaseAdapter {
@@ -96,22 +97,47 @@ switch (p.name_doh) {
                 EditText editText2=(EditText) getactivity.findViewById(R.id.editText2);
 
 
+                int kuda=p.id;
+                int summa=Integer.parseInt(editText.getText().toString());
+                String komment=editText2.getText().toString();
+                String data_fakt=date;
+                int name_doh=p.name_doh;
+                int postoyan=p.postoyan;
+
+                db.execSQL("INSERT INTO `an_dkr_hist`" +
+                    " ( `kuda`, `summa`, `komment`, `data_fakt`, `visible`, `postoyan`, name_dohod)" +
+                    " VALUES" +
+                    " ( '"+kuda+"', '"+summa+"', '"+komment+"', '"+data_fakt+"', 0, '"+postoyan+"', '"+name_doh+"')");
 
 
 
-                cv.put("id_clienta", 1);
-                cv.put("kuda", p.id);
-                cv.put("summa", Integer.parseInt(editText.getText().toString()));
+                db.execSQL("UPDATE `an_dohod` SET" +
+                        " `summa_fakt`=summa_fakt+'"+summa+"'" +
+                        " WHERE id='"+kuda+"'");
 
-                cv.put("komment", editText2.getText().toString());
-                cv.put("data_fakt", date);
-               // cv.put("data", 0);
-                cv.put("visible", 0);
-                cv.put("postoyan", 0);
-                cv.put("name_dohod", p.name_doh);
+//определим текущий ли месяц
+               boolean istekmes=false;
+               String[] tekmesprov=data_fakt.split("\\.");
 
-                // вставляем запись и получаем ее ID
-                long rowID = db.insert("an_dkr_hist", null, cv);
+                String now=Calendar.getInstance().get(Calendar.YEAR)+"."+(Calendar.getInstance().get(Calendar.MONTH)+1);
+                if((tekmesprov[0]+"."+tekmesprov[1])==now)istekmes=true;
+                String vstavka="";
+                switch(name_doh){
+                    case 1:
+                        vstavka="`balance`=balance+'"+summa+"'";
+                        if(istekmes) vstavka+=", vsego_mes_zarab=vsego_mes_zarab+'"+summa+"'";
+                        break;
+                    case 2:
+                        vstavka="`balance`=balance-'"+summa+"'";
+                        if(istekmes) vstavka+=", vsego_mes_potr=vsego_mes_potr+'"+summa+"'";
+                        break;
+                }
+
+                db.execSQL("UPDATE `an_users` SET "+vstavka);
+
+
+
+
 
                 getactivity.finish();
             }

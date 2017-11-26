@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * Created by nikita on 19.11.2017.
@@ -34,16 +35,43 @@ public class new_dohod extends AppCompatActivity {
         name_dohod= getIntent().getIntExtra("name_dohod", 0);
 
 
-
-
-
-
+        CheckBox checkBox=(CheckBox) findViewById(R.id.checkBox);
+        TextView tb_red_name=(TextView) findViewById(R.id.tb_red_name);
+        TextView tb_red_summa=(TextView) findViewById(R.id.tb_red_summa);
+        Button doh_del_btn=(Button) findViewById(R.id.doh_del_btn);
         Button button5=(Button) findViewById(R.id.doh_red_btn);
+
+        button5.setText("Создать");
+        doh_del_btn.setVisibility(View.GONE);
+        checkBox.setVisibility(View.GONE);
+        switch(name_dohod) {
+            case 1:
+                tb_red_name.setText("Название дохода");
+                tb_red_summa.setText("Сколько планируете получать?");
+                break;
+            case 2:
+                tb_red_name.setText("На что планируете тратить?");
+                tb_red_summa.setText("Сколько планируете тратить?");
+
+
+
+
+
+                break;
+            case 3:
+                tb_red_name.setText("На что копим?");
+                tb_red_summa.setText("Сколько планируете откладывать средств ежемесячно?");
+                break;
+
+
+        }
+
+
+
         button5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
                 MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(tecactivity);
-                ContentValues cv = new ContentValues();
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 
                 EditText editText4=(EditText) findViewById(R.id.doh_red_komment);
@@ -52,19 +80,16 @@ public class new_dohod extends AppCompatActivity {
                 int postoyan_post=0;
                 if(((CheckBox) findViewById(R.id.checkBox)).isChecked()) postoyan_post=1;
 
-                cv.put("id_clienta", 1);
-                cv.put("name_dohod", name_dohod);
-                cv.put("summa_dohod", Integer.parseInt(editText5.getText().toString()));
-                cv.put("summa_fakt", 0);
-                cv.put("komment", editText4.getText().toString());
-                cv.put("visible", 0);
-                cv.put("postoyan", postoyan_post);
-
-                // вставляем запись и получаем ее ID
-                long rowID = db.insert("an_dohod", null, cv);
 
 
-                cv.clear();
+                db.execSQL("INSERT INTO `an_dohod`" +
+                        "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`, `postoyan`) VALUES" +
+                        " ('"+name_dohod+"','"+Integer.parseInt(editText5.getText().toString())+"',0,'"+editText4.getText().toString()+"',0,'"+postoyan_post+"')");
+
+
+
+
+
 
                 String vstavka="";
                 switch(name_dohod){
