@@ -30,10 +30,6 @@
         <activity
             android:name=".red_dkr"
             android:label="На что потратились?" />
-        <activity
-            android:name=".TABBED"
-            android:label="@string/title_activity_tabbed"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

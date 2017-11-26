@@ -41,15 +41,31 @@
             />
 
 
-        <GridView
-            android:id="@+id/dkr_view"
+
+        <Button
+            android:id="@+id/crea_dkr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:horizontalSpacing="5dp"
-            android:numColumns="3"
-            android:verticalSpacing="5dp"
-            />
+
+            android:background="@color/colorPrimary"
+            android:text="Сегодня"
+            android:textColor="#ffffff"/>
+        <Button
+            android:id="@+id/crea_dkr_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/colorPrimary"
+            android:text="Вчера"
+            android:textColor="#ffffff"/>
+        <Button
+            android:id="@+id/crea_dkr_kal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/colorPrimary"
+            android:text="Календарь"
+            android:textColor="#ffffff"/>
 
         <Button
             android:id="@+id/del_dkr"

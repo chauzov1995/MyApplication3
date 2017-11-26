@@ -3,14 +3,20 @@ package com.example.myapplication;
         import android.app.Activity;
         import android.content.Context;
         import android.content.Intent;
-        import android.graphics.Color;
+        import android.content.res.ColorStateList;
+        import android.graphics.PorterDuff;
+        import android.graphics.drawable.Drawable;
+        import android.os.Build;
+        import android.support.v4.content.ContextCompat;
+        import android.support.v4.graphics.drawable.DrawableCompat;
         import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.TextView;
-        import android.widget.Toast;
+        import android.widget.ImageView;
+        import android.widget.LinearLayout;
+        import android.widget.TextView;
 
         import com.example.myapplication.MainActivity.DBHelper;
 
@@ -74,8 +80,14 @@ public class BoxAdapter extends BaseAdapter {
             if (view == null) {
                 view = lInflater.inflate(R.layout.item_plus, parent, false);
             }
-            TextView tvText3=  (TextView) view.findViewById(R.id.tvText3);
-            tvText3.setOnClickListener(new View.OnClickListener() {
+
+            TextView tvText3 =(TextView) view.findViewById(R.id.tvText3);
+            LinearLayout llnp =(LinearLayout) view.findViewById(R.id.llnp);
+
+            tvText3.setText(p.komment);
+
+
+            llnp.setOnClickListener(new View.OnClickListener() {
                  public void onClick(View r) {
 
 /*
@@ -90,7 +102,11 @@ public class BoxAdapter extends BaseAdapter {
                      fTrans.addToBackStack(null);
                  //    fTrans.setRetainInstance(true);
                      fTrans.commit();
+
+
 */
+
+
 
                      Intent intent = new Intent(getactivity, new_dohod.class);
                                   intent.putExtra("name_dohod", p.name_doh);
@@ -126,7 +142,7 @@ public class BoxAdapter extends BaseAdapter {
 
 
             if (view == null) {
-                view = lInflater.inflate(R.layout.item, parent, false);
+                view = lInflater.inflate(R.layout.item_green, parent, false);
             }
 
 
@@ -134,54 +150,75 @@ public class BoxAdapter extends BaseAdapter {
             // и картинка
 
             Button  button4=(Button) view.findViewById(R.id.button4);
+            TextView tvText= (TextView) view.findViewById(R.id.tvText);
+            TextView  textView4 =(TextView) view.findViewById(R.id.textView4);
+            TextView textView5 =(TextView) view.findViewById(R.id.textView5);
+            TextView textView6 =(TextView) view.findViewById(R.id.textView6);
+            ImageView imageView =(ImageView) view.findViewById(R.id.imageView);
+
+
+
+          //  LinearLayout llitem=(LinearLayout) view.findViewById(R.id.llitem);
+
+
 
 
             switch(p.name_doh){
                 case 1:
-                    button4.setBackgroundColor(Color.parseColor("#99cc55"));
+                    TintIcons.tintImageView((ImageView) view.findViewById(R.id.imageView), R.color.ri_green);
+                    tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_green));
+                    textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_green));
+                    textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_green));
+                    button4.setBackground( getactivity.getResources().getDrawable(R.drawable.btn_green_item));
                         break;
                 case 2:
 
                     if(p.postoyan==1) {
-                        button4.setBackgroundColor(Color.parseColor("#bb9988"));
+                        TintIcons.tintImageView((ImageView) view.findViewById(R.id.imageView), R.color.ri_brown);
+                        tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
+                        textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
+                        textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
+                        button4.setBackground( getactivity.getResources().getDrawable(R.drawable.btn_brown_item));
                     }else{
-                        button4.setBackgroundColor(Color.parseColor("#ff9966"));
+                        TintIcons.tintImageView((ImageView) view.findViewById(R.id.imageView), R.color.ri_orage);
+                        tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
+                        textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
+                        textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
+                        button4.setBackground( getactivity.getResources().getDrawable(R.drawable.btn_orange_item));
                     }
                     break;
                 case 3:
-                    button4.setBackgroundColor(Color.parseColor("#55bbbb"));
+                    TintIcons.tintImageView((ImageView) view.findViewById(R.id.imageView), R.color.ri_blue);
+                    tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_blue));
+                    textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_blue));
+                    textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_blue));
+                    button4.setBackground( getactivity.getResources().getDrawable(R.drawable.btn_blue_item));
                     break;
 
 
             }
 
 
-            ((TextView) view.findViewById(R.id.tvText)).setText(p.suuma_fakt + " р.");
-            ((TextView) view.findViewById(R.id.textView4)).setText(p.komment);
-            ((TextView) view.findViewById(R.id.textView5)).setText(p.suuma_doh + " р.");
+            tvText.setText(p.suuma_fakt + "");
+            textView4.setText(p.komment);
+            textView5.setText(p.suuma_doh + " р.");
+
+
 
 
             button4.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View r) {
 
 
-                //    Fragment f = new dohod_red();
-                //    Bundle bundle = new Bundle();
-                //    bundle.putInt("id", p.id);
-                 //   bundle.putInt("summa", p.suuma_doh);
-                 //   bundle.putString("komment", p.komment);
-               //     f.setArguments(bundle);
-
 
                     Intent intent = new Intent(getactivity, new_dkr_crea.class);
+                    intent.putExtra("kuda", p.id);
                     intent.putExtra("name_doh", p.name_doh);
+                    intent.putExtra("postoyan", p.postoyan);
                     getactivity.startActivity(intent);
 
 
-                  //  FragmentTransaction fTrans = getactivity.getFragmentManager().beginTransaction();
-                  //  fTrans.replace(R.id.frgmCont, f);
-                  //  fTrans.addToBackStack(null);
-                   // fTrans.commit();
+
 
                 }
             });
@@ -240,5 +277,26 @@ public class BoxAdapter extends BaseAdapter {
         return box;
     }
 
+    public static class TintIcons {
 
+        public static Drawable tintIcon(Drawable icon, ColorStateList colorStateList) {
+            if(icon!=null) {
+                icon = DrawableCompat.wrap(icon).mutate();
+                DrawableCompat.setTintList(icon, colorStateList);
+                DrawableCompat.setTintMode(icon, PorterDuff.Mode.SRC_IN);
+            }
+            return icon;
+        }
+
+        public static void tintImageView(ImageView imageView, int colorStateListResId) {
+            ColorStateList list = ContextCompat.getColorStateList(imageView.getContext(), colorStateListResId);
+            if (list != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    imageView.setImageTintList(list);
+                } else {
+                    imageView.setImageDrawable(tintIcon(imageView.getDrawable(), list));
+                }
+            }
+        }
+    }
 }

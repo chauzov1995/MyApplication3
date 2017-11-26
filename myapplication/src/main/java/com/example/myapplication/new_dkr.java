@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,37 +34,24 @@ public class new_dkr extends Fragment {
     View v;
     String date;
     Calendar dateAndTime= Calendar.getInstance();
+
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
          v= inflater.inflate(R.layout.new_dkr, null);
 
           textView3  =((TextView) v.findViewById(R.id.textView3));
-       Button button3  =((Button) v.findViewById(R.id.button3));
-        Button button6  =((Button) v.findViewById(R.id.button6));
 
         setInitialDateTime();
 
 
 
-        //Toast.makeText(getActivity(),
-         //       date, Toast.LENGTH_SHORT).show();
-        button3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View r) {
-                dateAndTime.add(Calendar.DATE, -1);
-                setInitialDateTime();
-                onResume();
 
-            }
-        });
-        button6.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View r) {
 
-                dateAndTime.add(Calendar.DATE, +1);
-                setInitialDateTime();
-                onResume();
-            }
-        });
+
 
 
         textView3.setOnClickListener(new View.OnClickListener() {
@@ -76,20 +66,7 @@ public class new_dkr extends Fragment {
             });
 
 
-        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                  //      .setAction("Action", null).show();
 
-                Intent intent = new Intent(getActivity(), new_dkr_crea.class);
-
-               intent.putExtra("date", date);
-
-                startActivity(intent);
-            }
-        });
 
 return v;
     }

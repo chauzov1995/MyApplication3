@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
 
-                    setTitle("Каледарь");
+                    setTitle("Отчёт по дням");
                     fTrans.replace(R.id.frgmCont, New_dkr);
                     fTrans.addToBackStack(null);
                     fTrans.commit();
@@ -161,11 +161,11 @@ switch (c.getInt(name_dohod)){
             } while (c.moveToNext());
         }
 
-        products_doh.add(new Product("Создать+", 0,
+        products_doh.add(new Product("Добавить доход", 0,
                 0, 0, 1, 1, 0));
-        products_rash.add(new Product("Создать+", 0,
+        products_rash.add(new Product("Добавить расход", 0,
                 0, 0, 2, 1, 0));
-        products_zel.add(new Product("Создать+", 0,
+        products_zel.add(new Product("Добавить цель", 0,
                 0, 0, 3, 1,0));
         c.close();
 

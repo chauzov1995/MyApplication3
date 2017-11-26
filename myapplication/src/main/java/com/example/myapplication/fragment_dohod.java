@@ -53,7 +53,7 @@ public class fragment_dohod extends Fragment {
         int size_gv_doh=(int)Math.ceil(((double)MainActivity.products_doh.size())/3);
         int size_gv_rash= (int)Math.ceil(((double)MainActivity.products_rash.size())/3);
         int size_gv_zel=(int)Math.ceil(((double)MainActivity.products_zel.size())/3);
-        int vsegoheight=(size_gv_zel+size_gv_doh+size_gv_rash)*135+5;
+        int vsegoheight=(size_gv_zel+size_gv_doh+size_gv_rash)*134+4;
         LinearLayout llheight = (LinearLayout) v.findViewById(R.id.llheight);
         ViewGroup.LayoutParams params = llheight.getLayoutParams();
         int pixels = (int) (vsegoheight * scale + 0.5f);

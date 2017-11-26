@@ -45,8 +45,10 @@ public class red_dkr extends AppCompatActivity {
 
 
 
+        Button crea_dkr = (Button) findViewById(R.id.crea_dkr);
+        Button crea_dkr_to = (Button) findViewById(R.id.crea_dkr_to);
+        Button crea_dkr_kal = (Button) findViewById(R.id.crea_dkr_kal);
         Button del_dkr = (Button) findViewById(R.id.del_dkr);
-        GridView dkr_view = (GridView) findViewById(R.id.dkr_view);
             EditText editText=(EditText) findViewById(R.id.editText);
               EditText editText2=(EditText) findViewById(R.id.editText2);
 
@@ -54,8 +56,9 @@ public class red_dkr extends AppCompatActivity {
         editText.setText(Integer.toString(suuma_intent));
         editText2.setText(komment_intent);
 
-
-        dkr_view.setVisibility(View.GONE);
+        crea_dkr.setVisibility(View.GONE);
+        crea_dkr_to.setVisibility(View.GONE);
+        crea_dkr_kal.setVisibility(View.GONE);
 
 
         del_dkr.setOnClickListener(new View.OnClickListener() {
