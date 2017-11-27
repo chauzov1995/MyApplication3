@@ -2,21 +2,18 @@ package com.example.myapplication;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
 
@@ -27,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     statistics frag2;
     fragment_dohod fragment_dohod;
     new_dkr New_dkr;
+    fragment_tab Fragment_tab;
     public  static ArrayList<Product> dkr_kart = new ArrayList<Product>();
   public  static ArrayList<Product> products_doh = new ArrayList<Product>();
     public  static ArrayList<Product> products_rash = new ArrayList<Product>();
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     BoxAdapter boxAdapter;
  static Activity getactivity;
 
-
+    public static FragmentManager fm;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -84,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        fm = getSupportFragmentManager();
         getactivity=this;
         setContentView(R.layout.activity_main);
 
@@ -96,16 +95,17 @@ public class MainActivity extends AppCompatActivity {
             frag2 = new statistics();
             fragment_dohod = new fragment_dohod();
             New_dkr = new new_dkr();
+        Fragment_tab = new fragment_tab();
 dbHelper = new DBHelper(this);
 
 
 
-        fTrans.replace(R.id.frgmCont, New_dkr);
+        fTrans.replace(R.id.frgmCont, Fragment_tab);
         fTrans.addToBackStack(null);
        fTrans.commit();
 
 
-
+        //fragment_tab = new fragment_tab();
 
 
      //   Intent intent = new Intent(getactivity, TABBED.class);
@@ -113,6 +113,9 @@ dbHelper = new DBHelper(this);
      //   getactivity.startActivity(intent);
 
     }
+
+
+
 
 
 
