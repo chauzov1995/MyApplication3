@@ -51,7 +51,11 @@ public class new_dkr_crea extends AppCompatActivity {
         Button crea_dkr_to = (Button) findViewById(R.id.crea_dkr_to);
         Button crea_dkr_kal = (Button) findViewById(R.id.crea_dkr_kal);
         Button del_dkr = (Button) findViewById(R.id.del_dkr);
+        Button crea_dkr_save = (Button) findViewById(R.id.crea_dkr_save);
 
+
+
+        crea_dkr_save.setVisibility(View.GONE);
         del_dkr.setVisibility(View.GONE);
        // dkr_view.setAdapter(boxAdapter1);
 

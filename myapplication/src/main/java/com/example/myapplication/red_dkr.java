@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,7 @@ public class red_dkr extends AppCompatActivity {
     Activity tecactivity;
     int id,suuma_intent,id_intent;
     String komment_intent,data_fact_intent;
-    EditText doh_red_komment, doh_red_summa;
+    EditText editText2, editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +45,13 @@ public class red_dkr extends AppCompatActivity {
         data_fact_intent=getIntent().getStringExtra("data_fact");
 
 
-
+        Button crea_dkr_save = (Button) findViewById(R.id.crea_dkr_save);
         Button crea_dkr = (Button) findViewById(R.id.crea_dkr);
         Button crea_dkr_to = (Button) findViewById(R.id.crea_dkr_to);
         Button crea_dkr_kal = (Button) findViewById(R.id.crea_dkr_kal);
         Button del_dkr = (Button) findViewById(R.id.del_dkr);
-            EditText editText=(EditText) findViewById(R.id.editText);
-              EditText editText2=(EditText) findViewById(R.id.editText2);
+             editText=(EditText) findViewById(R.id.editText);
+               editText2=(EditText) findViewById(R.id.editText2);
 
 
         editText.setText(Integer.toString(suuma_intent));
@@ -60,7 +61,81 @@ public class red_dkr extends AppCompatActivity {
         crea_dkr_to.setVisibility(View.GONE);
         crea_dkr_kal.setVisibility(View.GONE);
 
+        crea_dkr_save.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View r) {
 
+
+                 MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(red_dkr.this);
+                 ContentValues cv = new ContentValues();
+                 SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+
+
+
+
+
+                 Cursor c = db.rawQuery("SELECT * FROM `an_dkr_hist` WHERE id='"+id_intent+"' ", null);
+
+                 c.moveToFirst();
+
+
+                 int summa_gt=  Integer.parseInt( editText.getText().toString());
+                 String komment_gt= editText2.getText().toString();
+
+                 int summa = c.getInt(c.getColumnIndex("summa"));
+                 int kuda = c.getInt(c.getColumnIndex("kuda"));
+                 int name_dohod = c.getInt(c.getColumnIndex("name_dohod"));
+                 String data_fakt = c.getString(c.getColumnIndex("data_fakt"));
+
+                 int korr=summa-summa_gt;
+                 Log.d("mylog", korr+" "+summa+" "+summa_gt);
+
+
+
+                 db.execSQL("UPDATE `an_dkr_hist` SET `summa`='"+summa_gt+"', `komment`='"+komment_gt+"' WHERE" +
+                         " id='"+id_intent+"'");
+
+
+                 db.execSQL("UPDATE `an_dohod` SET" +
+                         " `summa_fakt`=summa_fakt-'"+korr+"'" +
+                         " WHERE id='"+kuda+"'");
+
+
+                 String[] tekmesprov=data_fakt.split("\\.");
+
+                 boolean istekmes=false;
+                 String now= Calendar.getInstance().get(Calendar.YEAR)+"."+(Calendar.getInstance().get(Calendar.MONTH)+1);
+                 if((tekmesprov[0]+"."+tekmesprov[1])==now)istekmes=true;
+
+                 String vstavka="";
+                 switch(name_dohod){
+                     case 1:
+                         vstavka="`balance`=balance-'"+korr+"'";
+                         if(istekmes)vstavka+=", vsego_mes_zarab=vsego_mes_zarab-'"+korr+"'";
+                         break;
+                     case 2:
+                         vstavka="`balance`=balance+'"+korr+"'";
+                         if(istekmes)vstavka+=", vsego_mes_potr=vsego_mes_potr-'"+korr+"'";
+                         break;
+                 }
+
+                 db.execSQL("UPDATE `an_users` SET "+vstavka);
+
+
+                 // подготовим значения для обновления
+                 // cv.put("visible", 1);
+
+                 // обновляем по id
+                 //     int updCount = db.update("an_dkr_hist", cv, "id = ?",
+                 //               new String[] { Integer.toString(p.id) });
+
+                 //onResume();
+
+                 finish();
+
+
+             }
+         });
         del_dkr.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
 
@@ -97,7 +172,7 @@ public class red_dkr extends AppCompatActivity {
                 String now= Calendar.getInstance().get(Calendar.YEAR)+"."+(Calendar.getInstance().get(Calendar.MONTH)+1);
                 if((tekmesprov[0]+"."+tekmesprov[1])==now)istekmes=true;
 
-String vstavka="";
+                String vstavka="";
                 switch(name_dohod){
                     case 1:
                         vstavka="`balance`=balance-'"+summa+"'";
