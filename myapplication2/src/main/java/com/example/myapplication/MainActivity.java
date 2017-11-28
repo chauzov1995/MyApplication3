@@ -1,140 +1,53 @@
 package com.example.myapplication;
 
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MainActivity extends FragmentActivity {
 
-import me.relex.circleindicator.CircleIndicator;
+    static final String TAG = "myLogs";
+    static final int PAGE_COUNT = 30;
 
+    ViewPager pager;
+    PagerAdapter pagerAdapter;
 
-public class MainActivity extends AppCompatActivity {
-
-    @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
 
-        setContentView(R.layout.activity_main);
 
 
-        Fragment demoFragment = Fragment.instantiate(this, SampleListFragment.class.getName());
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, demoFragment);
-        fragmentTransaction.commit();
+        pager = (ViewPager) findViewById(R.id.pager);
+        pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+        pager.setAdapter(pagerAdapter);
 
-        getSupportFragmentManager().addOnBackStackChangedListener(
-                new FragmentManager.OnBackStackChangedListener() {
-                    @Override public void onBackStackChanged() {
-                        int count = getSupportFragmentManager().getBackStackEntryCount();
-                        ActionBar actionbar = getSupportActionBar();
-                        if (actionbar != null) {
-                            actionbar.setDisplayHomeAsUpEnabled(count > 0);
-                            actionbar.setDisplayShowHomeEnabled(count > 0);
-                        }
-                    }
-                });
     }
 
+    private class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
-
-    public static class SampleListFragment extends Fragment {
-
-        @Nullable @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                                 @Nullable Bundle savedInstanceState) {
-            return new RecyclerView(getContext());
+        public MyFragmentPagerAdapter(FragmentManager fm) {
+            super(fm);
         }
 
-        @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-            SampleListAdapter adapter = new SampleListAdapter();
-
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            recyclerView.setAdapter(adapter);
-
-            adapter.add(new SampleInfo("Default", DefaultFragment.class.getName()));
-
+        @Override
+        public Fragment getItem(int position) {
+            return PageFragment.newInstance(position);
         }
 
-        private class SampleListAdapter extends RecyclerView.Adapter<ItemViewHolder> {
-
-            private final List<SampleInfo> mList = new ArrayList<>();
-
-            @Override public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                return ItemViewHolder.create(parent);
-            }
-
-            @Override public void onBindViewHolder(final ItemViewHolder holder, int position) {
-                SampleInfo sample = mList.get(position);
-                holder.bindView(sample.title);
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View v) {
-                        navigateToFragment(mList.get(holder.getAdapterPosition()).fragmentName);
-                    }
-                });
-            }
-
-            @Override public int getItemCount() {
-                return mList.size();
-            }
-
-            public boolean add(SampleInfo object) {
-                int lastIndex = mList.size();
-                if (mList.add(object)) {
-                    notifyItemInserted(lastIndex);
-                    return true;
-                } else {
-                    return false;
-                }
-            }
+        @Override
+        public int getCount() {
+            return PAGE_COUNT;
         }
 
-        private void navigateToFragment(String fragmentName) {
-            Fragment fragment = Fragment.instantiate(getContext(), fragmentName);
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
-                    android.R.anim.fade_in, android.R.anim.fade_out);
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.addToBackStack(fragmentName);
-            fragmentTransaction.commit();
-        }
-
-        private static class ItemViewHolder extends RecyclerView.ViewHolder {
-            public ItemViewHolder(View itemView) {
-                super(itemView);
-            }
-
-            public void bindView(String title) {
-                ((TextView) itemView).setText(title);
-            }
-
-            public static ItemViewHolder create(ViewGroup viewGroup) {
-                return new ItemViewHolder(LayoutInflater.from(viewGroup.getContext())
-                        .inflate(R.layout.item_view, viewGroup, false));
-            }
-        }
-
-        private static class SampleInfo {
-            public String title;
-            public String fragmentName;
-
-            public SampleInfo(String title, String fragmentName) {
-                this.title = title;
-                this.fragmentName = fragmentName;
-            }
-        }
     }
+
 }

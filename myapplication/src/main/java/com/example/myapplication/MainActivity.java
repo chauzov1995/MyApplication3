@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     statistics frag2;
     fragment_dohod fragment_dohod;
     new_dkr New_dkr;
-    fragment_tab Fragment_tab=new fragment_tab();
+
     public  static ArrayList<Product> dkr_kart = new ArrayList<Product>();
   public  static ArrayList<Product> products_doh = new ArrayList<Product>();
     public  static ArrayList<Product> products_rash = new ArrayList<Product>();
@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
                   //  Fragment_tab.onResume();
                     setTitle("Отчёт по дням");
-                    fTrans.replace(R.id.frgmCont, Fragment_tab);
+
+                    fTrans.replace(R.id.frgmCont, new fragment_tab());
                     fTrans.commit();
                     return true;
                 case R.id.navigation_notifications:
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        setTitle("Отчёт по дням");
+
         fTrans = getFragmentManager().beginTransaction();
             frag2 = new statistics();
             fragment_dohod = new fragment_dohod();
@@ -99,8 +100,10 @@ public class MainActivity extends AppCompatActivity {
 dbHelper = new DBHelper(this);
 
 
-         fTrans.replace(R.id.frgmCont, Fragment_tab);
-           fTrans.commit();
+        setTitle("Отчёт по дням");
+
+        fTrans.replace(R.id.frgmCont, new fragment_tab());
+        fTrans.commit();
 
 
         //fragment_tab = new fragment_tab();
@@ -127,7 +130,7 @@ dbHelper = new DBHelper(this);
         products_zel.clear();
 
         // делаем запрос всех данных из таблицы mytable, получаем Cursor
-        Cursor c = db.rawQuery("select * from `an_dohod` Where visible==0", null);
+        Cursor c = db.rawQuery("select * from `an_dohod` Where visible=0", null);
         // ставим позицию курсора на первую строку выборки
         // если в выборке нет строк, вернется false
         if (c.moveToFirst()) {
