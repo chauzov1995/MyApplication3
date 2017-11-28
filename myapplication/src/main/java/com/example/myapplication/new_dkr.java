@@ -105,7 +105,7 @@ return v;
 
 
 
-      MainActivity.loadhist(getActivity(),date);
+      MainActivity.loadhist(getActivity());
 
 
 

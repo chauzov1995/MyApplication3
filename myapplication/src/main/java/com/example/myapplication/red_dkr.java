@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -24,6 +25,7 @@ public class red_dkr extends AppCompatActivity {
     int id,suuma_intent,id_intent;
     String komment_intent,data_fact_intent;
     EditText editText2, editText;
+    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,7 +171,7 @@ public class red_dkr extends AppCompatActivity {
                 String[] tekmesprov=data_fakt.split("\\.");
 
                 boolean istekmes=false;
-                String now= Calendar.getInstance().get(Calendar.YEAR)+"."+(Calendar.getInstance().get(Calendar.MONTH)+1);
+                String now= ft.format( Calendar.getInstance());//Calendar.getInstance().get(Calendar.YEAR)+"."+(Calendar.getInstance().get(Calendar.MONTH)+1);
                 if((tekmesprov[0]+"."+tekmesprov[1])==now)istekmes=true;
 
                 String vstavka="";

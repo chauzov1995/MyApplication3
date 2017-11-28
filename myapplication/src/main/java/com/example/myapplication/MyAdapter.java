@@ -5,11 +5,12 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends FragmentPagerAdapter {
+public class MyAdapter extends FragmentStatePagerAdapter {
     private Context context = null;
     int itemscol;
     ArrayList<String> datearr;

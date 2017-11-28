@@ -31,25 +31,9 @@ public class fragment_tab extends Fragment {
         v = inflater.inflate(R.layout.activity_main333, null);
 
 
-        MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(getActivity());
-
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 
-        Cursor c = db.rawQuery("SELECT DISTINCT data_fakt FROM `an_dkr_hist` order by data_fakt asc", null);
-       //число записей  c.getCount()
-        c.moveToFirst();
-        ArrayList<String> datamassiv=new ArrayList<String>();
-        do{
-            datamassiv.add( c.getString(c.getColumnIndex("data_fakt")));
 
-    } while (c.moveToNext());
-
-Log.d("asdas","asdasd"+ c.getCount());
-
-        ViewPager pager=(ViewPager) v.findViewById(R.id.pager);
-        pager.setAdapter(new MyAdapter(getActivity(), MainActivity.fm, datamassiv));
-        pager.setCurrentItem(datamassiv.size()-1);
 
 
 
@@ -57,4 +41,52 @@ Log.d("asdas","asdasd"+ c.getCount());
 
 
 return v;
-    }}
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+
+
+
+        MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(getActivity());
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+
+        Cursor c = db.rawQuery("SELECT DISTINCT data_fakt FROM `an_dkr_hist` order by data_fakt asc", null);
+        //число записей  c.getCount()
+        ArrayList<String> datamassiv = new ArrayList<String>();
+        if(c.moveToFirst()){
+
+            do {
+                datamassiv.add(c.getString(c.getColumnIndex("data_fakt")));
+
+            } while (c.moveToNext());
+        }
+
+
+        c.close();
+        MainActivity.loadhist(getActivity());
+
+
+        Log.d("asdas","asdasd"+ c.getCount());
+
+        ViewPager pager=(ViewPager) v.findViewById(R.id.pager);
+        pager.setAdapter(new MyAdapter(getActivity(), MainActivity.fm, datamassiv));
+        pager.setCurrentItem(datamassiv.size()-1);
+
+Log.d("asdad","Восстановлен таб");
+
+
+
+    }
+
+
+
+
+}

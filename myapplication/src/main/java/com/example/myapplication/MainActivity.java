@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     statistics frag2;
     fragment_dohod fragment_dohod;
     new_dkr New_dkr;
-    fragment_tab Fragment_tab;
+    fragment_tab Fragment_tab=new fragment_tab();
     public  static ArrayList<Product> dkr_kart = new ArrayList<Product>();
   public  static ArrayList<Product> products_doh = new ArrayList<Product>();
     public  static ArrayList<Product> products_rash = new ArrayList<Product>();
@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
 
+                  //  Fragment_tab.onResume();
                     setTitle("Отчёт по дням");
-                    fTrans.replace(R.id.frgmCont, New_dkr);
-                    fTrans.addToBackStack(null);
+                    fTrans.replace(R.id.frgmCont, Fragment_tab);
                     fTrans.commit();
                     return true;
                 case R.id.navigation_notifications:
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
                     setTitle("Конверты");
                     fTrans.replace(R.id.frgmCont, fragment_dohod);
-                    fTrans.addToBackStack(null);
+                 //   fTrans.addToBackStack(null);
                     fTrans.commit();
                     return true;
                 case R.id.navigation_dashboard:
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
                     setTitle("Статистика");
                     fTrans.replace(R.id.frgmCont, frag2);
-                    fTrans.addToBackStack(null);
+                  //  fTrans.addToBackStack(null);
                     fTrans.commit();
                     return true;
 
@@ -90,19 +90,17 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        setTitle("Каледарь");
+        setTitle("Отчёт по дням");
         fTrans = getFragmentManager().beginTransaction();
             frag2 = new statistics();
             fragment_dohod = new fragment_dohod();
             New_dkr = new new_dkr();
-        Fragment_tab = new fragment_tab();
+      //  Fragment_tab = new fragment_tab();
 dbHelper = new DBHelper(this);
 
 
-
-        fTrans.replace(R.id.frgmCont, Fragment_tab);
-        fTrans.addToBackStack(null);
-       fTrans.commit();
+         fTrans.replace(R.id.frgmCont, Fragment_tab);
+           fTrans.commit();
 
 
         //fragment_tab = new fragment_tab();
@@ -184,11 +182,10 @@ switch (c.getInt(name_dohod)){
         dkr_kart.clear();
 
 
-        // делаем запрос всех данных из таблицы mytable, получаем Cursor
-        Cursor c = db.query("an_dohod", null,
-                "visible == ? AND (name_dohod == ? OR name_dohod == ?)",
-                new String[] { String.valueOf(0), String.valueOf(1),String.valueOf(2)},
-                null, null, "name_dohod DESC");
+        Cursor c = db.rawQuery("SELECT * FROM `an_dohod` Where visible=0 AND (name_dohod = 1 OR name_dohod = 2) order by name_dohod DESC ", null);
+
+
+
 
         // ставим позицию курсора на первую строку выборки
         // если в выборке нет строк, вернется false
@@ -222,44 +219,37 @@ switch (c.getInt(name_dohod)){
     }
 
 
-    public static void loadhist(Context context, String date){
+    public static void loadhist(Context context){
 
         DBHelper dbHelper = new DBHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         history.clear();
 
 
-        // делаем запрос всех данных из таблицы mytable, получаем Cursor
-        Cursor c = db.query("an_dkr_hist", null,
-                "visible == ? AND data_fakt == ?",
-                new String[] { String.valueOf(0), date},
-                null, null, "data DESC");
+        Cursor c = db.rawQuery("SELECT * FROM `an_dkr_hist` Where visible=0", null);
 
-        // ставим позицию курсора на первую строку выборки
-        // если в выборке нет строк, вернется false
+
         if (c.moveToFirst()) {
 
-            // определяем номера столбцов по имени в выборке
+
             int id = c.getColumnIndex("id");
             int summa = c.getColumnIndex("summa");
 
             int komment = c.getColumnIndex("komment");
             int kuda = c.getColumnIndex("kuda");
             int data_fakt = c.getColumnIndex("data_fakt");
-           // int name_dohod = c.getColumnIndex("name_dohod");
 
             do {
 
 
                 history.add(new History(c.getInt(id), c.getString(komment), c.getInt(summa),
-                       c.getString(data_fakt), c.getInt(kuda)));
+                        c.getString(data_fakt), c.getInt(kuda)));
 
 
                 // переход на следующую строку
                 // а если следующей нет (текущая - последняя), то false - выходим из цикла
             } while (c.moveToNext());
         }
-
 
         c.close();
 
@@ -277,7 +267,7 @@ switch (c.getInt(name_dohod)){
         super.onResume();
 
       //  loadcart(this);
-        fragment_dohod = new fragment_dohod();
+     //   fragment_dohod = new fragment_dohod();
            //  Toast.makeText(getApplicationContext(),
           //         "Пора покормить кота!", Toast.LENGTH_SHORT).show();
     }

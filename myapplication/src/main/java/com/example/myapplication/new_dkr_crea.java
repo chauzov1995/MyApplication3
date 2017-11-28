@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class new_dkr_crea extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class new_dkr_crea extends AppCompatActivity {
     Calendar dateAndTime= Calendar.getInstance();
     int kuda_intent, name_doh_intent, postoyan_intent;
     String   date;
+    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +137,7 @@ public class new_dkr_crea extends AppCompatActivity {
         boolean istekmes=false;
         String[] tekmesprov=data_fakt.split("\\.");
 
-        String now=Calendar.getInstance().get(Calendar.YEAR)+"."+(Calendar.getInstance().get(Calendar.MONTH)+1);
+        String now=ft.format( Calendar.getInstance().getTime());//.get(Calendar.YEAR)+"."+(Calendar.getInstance().get(Calendar.MONTH)+1);
         if((tekmesprov[0]+"."+tekmesprov[1])==now)istekmes=true;
         String vstavka="";
         switch(name_doh){
@@ -181,8 +183,9 @@ public class new_dkr_crea extends AppCompatActivity {
         // int seconds = dateAndTime.get(Calendar.SECOND);
         // date=DateUtils.formatDateTime(getActivity(), dateAndTime.getTimeInMillis(),
         //    DateUtils.FORMAT_NUMERIC_DATE|DateUtils.FORMAT_SHOW_YEAR);
-        date= dateAndTime.get(Calendar.YEAR)+"."+(dateAndTime.get(Calendar.MONTH)+1)+"."+dateAndTime.get(Calendar.DAY_OF_MONTH);
+       // date= dateAndTime.get(Calendar.YEAR)+"."+(dateAndTime.get(Calendar.MONTH)+1)+"."+dateAndTime.get(Calendar.DAY_OF_MONTH);
 
+        date= ft.format( dateAndTime.getTime()) ;
     }
 
 
