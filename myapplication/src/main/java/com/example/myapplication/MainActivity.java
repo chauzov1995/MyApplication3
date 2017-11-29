@@ -241,12 +241,13 @@ switch (c.getInt(name_dohod)){
             int komment = c.getColumnIndex("komment");
             int kuda = c.getColumnIndex("kuda");
             int data_fakt = c.getColumnIndex("data_fakt");
+            int name_dohod = c.getColumnIndex("name_dohod");
 
             do {
 
 
                 history.add(new History(c.getInt(id), c.getString(komment), c.getInt(summa),
-                        c.getString(data_fakt), c.getInt(kuda)));
+                        c.getString(data_fakt), c.getInt(kuda), c.getInt(name_dohod)));
 
 
                 // переход на следующую строку

@@ -104,6 +104,8 @@ public class PageFragment extends Fragment {
         return pageFragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,24 +129,27 @@ public class PageFragment extends Fragment {
 
 
         TextView textView3 = (TextView) v.findViewById(R.id.textView3);
-        textView3.setText("Число " + datamassiv.get(pageNumber));
+
 
 
 
         //  MainActivity.history.
         MainActivity.loadhist(getActivity());
         ArrayList<History> poisk = new ArrayList<History>();
-
+int vsego_port=0;
         for (History data : MainActivity.history
                 ) {
             if (data.data_fact.equals(datamassiv.get(pageNumber))) {
                 poisk.add(data);
+                if(data.name_doh==2) {
+                    vsego_port += data.suuma;
+                }
                 Log.d("asdad", data.data_fact+" "+datamassiv);
 
             }
 
         }
-
+        textView3.setText(Integer.toString(vsego_port)+" р.");
 
         history_adapter boxAdapter2 = new history_adapter(getActivity(), poisk, getActivity());
         // настраиваем список

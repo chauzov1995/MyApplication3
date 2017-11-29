@@ -100,6 +100,11 @@ return v;
             return datamassiv.size();
         }
 
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "Дата " + datamassiv.get(position);
+        }
+
     }
 
     @Override

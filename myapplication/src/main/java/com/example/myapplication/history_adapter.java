@@ -79,8 +79,17 @@ import java.util.ArrayList;
 
            // Button button=  (Button) view.findViewById(R.id.button);
             textView8.setText(p.komment);
-            textView9.setText(p.suuma+ " р.");
 
+            switch (p.name_doh){
+                case 1:
+                    textView9.setTextColor(0xFF88bb55);
+                textView9.setText("+"+p.suuma + " р.");
+            break;
+                case 2:
+                    textView9.setTextColor(0xFFff5555);
+                    textView9.setText("-"+p.suuma + " р.");
+                    break;
+            }
 
             histitem.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View r) {
