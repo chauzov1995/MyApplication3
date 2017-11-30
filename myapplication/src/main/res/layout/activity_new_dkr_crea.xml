@@ -39,34 +39,6 @@
             android:ems="10"
             android:inputType="textPersonName"
             />
-
-
-
-        <Button
-            android:id="@+id/crea_dkr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/colorPrimary"
-            android:text="Сегодня"
-            android:textColor="#ffffff"/>
-        <Button
-            android:id="@+id/crea_dkr_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/colorPrimary"
-            android:text="Вчера"
-            android:textColor="#ffffff"/>
-        <Button
-            android:id="@+id/crea_dkr_kal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/colorPrimary"
-            android:text="Календарь"
-            android:textColor="#ffffff"/>
-
         <Button
             android:id="@+id/crea_dkr_save"
             android:layout_width="match_parent"
@@ -84,6 +56,50 @@
             android:background="@color/colorDelete"
             android:text="Удалить"
             android:textColor="#ffffff"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/crea_dkr_kal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="Календарь"
+                    android:textColor="#ffffff" />
+
+
+                <Button
+                    android:id="@+id/crea_dkr_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="Вчера"
+                    android:textColor="#ffffff" />
+
+
+                <Button
+                    android:id="@+id/crea_dkr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="Сегодня"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+        </RelativeLayout>
 
 
     </LinearLayout>

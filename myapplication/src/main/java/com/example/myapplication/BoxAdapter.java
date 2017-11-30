@@ -210,20 +210,29 @@ public class BoxAdapter extends BaseAdapter {
                 public void onClick(View r) {
 
 
+if(fragment_dohod.lonpower){
 
-                    Intent intent = new Intent(getactivity, new_dkr_crea.class);
-                    intent.putExtra("kuda", p.id);
-                    intent.putExtra("name_doh", p.name_doh);
-                    intent.putExtra("postoyan", p.postoyan);
-                    getactivity.startActivity(intent);
+    Intent intent = new Intent(getactivity, dohod_red.class);
+    intent.putExtra("id", p.id);
+    intent.putExtra("summa", p.suuma_doh);
+    intent.putExtra("komment", p.komment);
+    intent.putExtra("postoyan", p.postoyan);
+    intent.putExtra("name_doh", p.name_doh);
+    getactivity.startActivity(intent);
+}else {
+    Intent intent = new Intent(getactivity, new_dkr_crea.class);
+    intent.putExtra("kuda", p.id);
+    intent.putExtra("name_doh", p.name_doh);
+    intent.putExtra("postoyan", p.postoyan);
+    getactivity.startActivity(intent);
 
-
+}
 
 
                 }
             });
 
-
+/*
             button4.setOnLongClickListener(new View.OnLongClickListener() {
                 public boolean onLongClick(View r) {
 
@@ -242,7 +251,7 @@ public class BoxAdapter extends BaseAdapter {
                     return true;
                 }
             });
-
+*/
         }
 
 

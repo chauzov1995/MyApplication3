@@ -229,7 +229,15 @@ switch (c.getInt(name_dohod)){
         history.clear();
 
 
-        Cursor c = db.rawQuery("SELECT * FROM `an_dkr_hist` Where visible=0", null);
+        Cursor c = db.rawQuery("SELECT an_dkr_hist.id," +
+                " an_dkr_hist.summa," +
+                " an_dkr_hist.komment as komment," +
+                " an_dkr_hist.kuda," +
+                " an_dkr_hist.data_fakt," +
+                " an_dkr_hist.name_dohod," +
+                " an_dohod.komment as nazv_doh FROM `an_dkr_hist`" +
+                " LEFT JOIN an_dohod ON an_dkr_hist.kuda = an_dohod.id" +
+                " Where an_dkr_hist.visible=0", null);
 
 
         if (c.moveToFirst()) {
@@ -242,12 +250,13 @@ switch (c.getInt(name_dohod)){
             int kuda = c.getColumnIndex("kuda");
             int data_fakt = c.getColumnIndex("data_fakt");
             int name_dohod = c.getColumnIndex("name_dohod");
+            int nazv_doh = c.getColumnIndex("nazv_doh");
 
             do {
 
 
                 history.add(new History(c.getInt(id), c.getString(komment), c.getInt(summa),
-                        c.getString(data_fakt), c.getInt(kuda), c.getInt(name_dohod)));
+                        c.getString(data_fakt), c.getInt(kuda), c.getInt(name_dohod), c.getString(nazv_doh)));
 
 
                 // переход на следующую строку

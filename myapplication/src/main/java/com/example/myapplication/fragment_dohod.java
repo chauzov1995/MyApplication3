@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
 public class fragment_dohod extends Fragment {
 
-
+static boolean lonpower=false;
     View v;
 
 
@@ -47,6 +49,9 @@ public class fragment_dohod extends Fragment {
         GridView gvdoh = (GridView) v.findViewById(R.id.gvdoh);
         GridView gvrash = (GridView) v.findViewById(R.id.gvrash);
         GridView gvzel = (GridView) v.findViewById(R.id.gvzel);
+        ScrollView scrview = (ScrollView) v.findViewById(R.id.scrview);
+
+
 
 
         final float scale = getActivity().getResources().getDisplayMetrics().density;
@@ -59,6 +64,18 @@ public class fragment_dohod extends Fragment {
         int pixels = (int) (vsegoheight * scale + 0.5f);
         params.height = pixels; // или в пикселях
         llheight.setLayoutParams(params);
+
+        gvdoh.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View r) {
+
+                lonpower=true;
+
+                  Toast.makeText(getActivity(),
+                         "Пора покормить кота!", Toast.LENGTH_SHORT).show();
+
+                return true;
+            }
+        });
 
 
 

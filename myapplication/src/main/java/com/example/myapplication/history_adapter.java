@@ -73,12 +73,15 @@ import java.util.ArrayList;
             if (view == null) {
                 view = lInflater.inflate(R.layout.hist_item, parent, false);
             }
+
+            TextView textView7=  (TextView) view.findViewById(R.id.textView7);
             TextView textView8=  (TextView) view.findViewById(R.id.textView8);
             TextView textView9=  (TextView) view.findViewById(R.id.textView9);
             LinearLayout histitem=  (LinearLayout) view.findViewById(R.id.histitem);
 
            // Button button=  (Button) view.findViewById(R.id.button);
             textView8.setText(p.komment);
+            textView7.setText(p.nazv_doh);
 
             switch (p.name_doh){
                 case 1:
