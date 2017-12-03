@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
                     fTrans.replace(R.id.frgmCont, new fragment_tab());
                     fTrans.commit();
+
                     return true;
                 case R.id.navigation_notifications:
                     // mTextMessage.setText(R.string.title_notifications);

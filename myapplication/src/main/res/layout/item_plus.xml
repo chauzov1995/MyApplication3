@@ -5,7 +5,8 @@
     android:layout_height="130dp"
     android:background="#ffffff"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="1.5dp">
 
     <TextView
 

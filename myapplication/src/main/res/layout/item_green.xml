@@ -6,7 +6,8 @@
     android:layout_height="130dp"
     android:background="@drawable/card_item_bg"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="1.5dp">
 
     <ImageView
         android:id="@+id/imageView"

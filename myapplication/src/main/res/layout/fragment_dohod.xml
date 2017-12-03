@@ -14,14 +14,12 @@
 
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/gvdoh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="4dp"
-                android:horizontalSpacing="4dp"
-                android:numColumns="3"
-                android:verticalSpacing="4dp">
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp">
 
 
             </android.support.v7.widget.RecyclerView>
@@ -30,23 +28,17 @@
                 android:id="@+id/gvrash"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="4dp"
-                android:horizontalSpacing="4dp"
-                android:numColumns="3"
-                android:verticalSpacing="4dp" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+          />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/gvzel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="4dp"
-                android:horizontalSpacing="4dp"
-                android:numColumns="3"
-                android:verticalSpacing="4dp" >
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="2dp">
 
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
