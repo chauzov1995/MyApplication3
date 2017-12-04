@@ -3,18 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/llitem"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="1.5dp"
     android:background="@drawable/card_item_bg"
     android:gravity="center"
     android:orientation="vertical"
-    android:layout_margin="1.5dp">
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_home_black_24dp"
-       />
+        app:srcCompat="@drawable/ic_home_black_24dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -28,8 +29,9 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="100"
+            android:textColor="@color/ri_green"
             android:textSize="24sp"
-            android:textColor="@color/ri_green"></TextView>
+           ></TextView>
 
         <TextView
             android:id="@+id/textView6"
@@ -38,8 +40,8 @@
             android:layout_weight="1"
             android:paddingLeft="2dp"
             android:text="р."
-            android:textSize="12sp"
-            android:textColor="@color/ri_green"/>
+            android:textColor="@color/ri_green"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <TextView
@@ -48,8 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:text="бензин"
-        android:textSize="12sp"
-        android:textColor="@color/ri_green"/>
+        android:textColor="@color/ri_green"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -67,5 +69,6 @@
         android:elegantTextHeight="false"
         android:text="Добавить"
         android:textColor="#ffffff"
-        android:textSize="10sp" />
+        android:textSize="10sp"
+        android:textAllCaps="false"/>
 </LinearLayout>

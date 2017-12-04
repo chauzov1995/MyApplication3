@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 /**
@@ -20,6 +21,7 @@ import android.widget.TextView;
  */
 
 public class new_dohod extends AppCompatActivity {
+
 
     int name_dohod;
     Activity tecactivity;
@@ -32,7 +34,7 @@ public class new_dohod extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         tecactivity=this;
-        name_dohod= getIntent().getIntExtra("name_dohod", 0);
+      //  name_dohod= getIntent().getIntExtra("name_dohod", 0);
 
 
         CheckBox checkBox=(CheckBox) findViewById(R.id.checkBox);
@@ -41,9 +43,13 @@ public class new_dohod extends AppCompatActivity {
         Button doh_del_btn=(Button) findViewById(R.id.doh_del_btn);
         Button button5=(Button) findViewById(R.id.doh_red_btn);
 
+
+
         button5.setText("Создать");
         doh_del_btn.setVisibility(View.GONE);
         checkBox.setVisibility(View.GONE);
+
+        /*
         switch(name_dohod) {
             case 1:
                 tb_red_name.setText("Название дохода");
@@ -66,12 +72,28 @@ public class new_dohod extends AppCompatActivity {
 
         }
 
-
+*/
 
         button5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
                 MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(tecactivity);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                Spinner spinner = (Spinner) findViewById(R.id.spinner);
+                String selected = spinner.getSelectedItem().toString();
+                switch(selected){
+                    case "Доход":
+                        name_dohod=1;
+                        break;
+                    case "Расход":
+                        name_dohod=2;
+                        break;
+                    case "Цель":
+                        name_dohod=3;
+                        break;
+
+
+                }
 
 
                 EditText editText4=(EditText) findViewById(R.id.doh_red_komment);

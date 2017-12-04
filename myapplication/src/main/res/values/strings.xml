@@ -4,5 +4,10 @@
     <string name="title_kalendar">Статистика</string>
     <string name="title_dohod">Конверты</string>
 
+    <string-array name="new_doh">
+        <item>Доход</item>
+        <item>Расход</item>
+        <item>Цель</item>
 
+    </string-array>
 </resources>

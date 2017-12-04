@@ -145,7 +145,11 @@ dbHelper = new DBHelper(this);
             int postoyan = c.getColumnIndex("postoyan");
 
             do {
+                products_doh.add(new Product(c.getString(komment), c.getInt(summa_dohod),
+                        c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0, c.getInt(postoyan)));
 
+
+                /*
 switch (c.getInt(name_dohod)){
     case 1:
         products_doh.add(new Product(c.getString(komment), c.getInt(summa_dohod),
@@ -160,7 +164,7 @@ switch (c.getInt(name_dohod)){
                 c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0, c.getInt(postoyan)));
         break;
 }
-
+*/
                 // переход на следующую строку
                 // а если следующей нет (текущая - последняя), то false - выходим из цикла
             } while (c.moveToNext());
@@ -168,10 +172,10 @@ switch (c.getInt(name_dohod)){
 
         products_doh.add(new Product("Добавить доход", 0,
                 0, 0, 1, 1, 0));
-        products_rash.add(new Product("Добавить расход", 0,
-                0, 0, 2, 1, 0));
-        products_zel.add(new Product("Добавить цель", 0,
-                0, 0, 3, 1,0));
+     //   products_rash.add(new Product("Добавить расход", 0,
+      //          0, 0, 2, 1, 0));
+     //   products_zel.add(new Product("Добавить цель", 0,
+        //        0, 0, 3, 1,0));
         c.close();
 
 

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +47,7 @@ public class dohod_red extends AppCompatActivity {
         CheckBox checkBox=(CheckBox) findViewById(R.id.checkBox);
         TextView tb_red_name=(TextView) findViewById(R.id.tb_red_name);
         TextView tb_red_summa=(TextView) findViewById(R.id.tb_red_summa);
-
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
 
         postoyan_intent=getIntent().getIntExtra("postoyan", 0);
@@ -63,6 +64,7 @@ public class dohod_red extends AppCompatActivity {
    //     doh_red_komment.setText(bundle.getString("komment"));
 
         checkBox.setVisibility(View.GONE);
+        spinner.setVisibility(View.GONE);
 switch(name_dohod_intent) {
     case 1:
         tb_red_name.setText("Название дохода");

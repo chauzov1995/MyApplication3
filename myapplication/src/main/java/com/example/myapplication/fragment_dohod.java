@@ -51,33 +51,33 @@ static boolean lonpower=false;
         //BoxAdapter  boxAdapter3 = new BoxAdapter(getActivity(), MainActivity.products_zel, getActivity());
       //  String[] myDataset = getActivity().getApplication().getDataSet();
         RecyclerAdapter  boxAdapter1 = new RecyclerAdapter(MainActivity.products_doh, getActivity());
-        RecyclerAdapter  boxAdapter2 = new RecyclerAdapter(MainActivity.products_rash, getActivity());
-        RecyclerAdapter  boxAdapter3 = new RecyclerAdapter(MainActivity.products_zel, getActivity());
+     //   RecyclerAdapter  boxAdapter2 = new RecyclerAdapter(MainActivity.products_rash, getActivity());
+      //  RecyclerAdapter  boxAdapter3 = new RecyclerAdapter(MainActivity.products_zel, getActivity());
      //   RecyclerAdapter  boxAdapter2 = new RecyclerAdapter(getDataSet());
     //    RecyclerAdapter  boxAdapter3 = new RecyclerAdapter(getDataSet());
         // настраиваем список
       RecyclerView gvdoh = (RecyclerView) v.findViewById(R.id.gvdoh);
-        RecyclerView gvrash = (RecyclerView) v.findViewById(R.id.gvrash);
-        RecyclerView gvzel = (RecyclerView) v.findViewById(R.id.gvzel);
+   //     RecyclerView gvrash = (RecyclerView) v.findViewById(R.id.gvrash);
+   //     RecyclerView gvzel = (RecyclerView) v.findViewById(R.id.gvzel);
        // gvdoh.setHasFixedSize(true);
         GridLayoutManager glm1=new GridLayoutManager(getActivity(),3);
         RecyclerView.LayoutManager  mLayoutManager1 = glm1;
-        GridLayoutManager glm2=new GridLayoutManager(getActivity(),3);
-        RecyclerView.LayoutManager  mLayoutManager2 = glm2;
-        GridLayoutManager glm3=new GridLayoutManager(getActivity(),3);
-        RecyclerView.LayoutManager  mLayoutManager3 = glm3;
+    //    GridLayoutManager glm2=new GridLayoutManager(getActivity(),3);
+    //    RecyclerView.LayoutManager  mLayoutManager2 = glm2;
+    //    GridLayoutManager glm3=new GridLayoutManager(getActivity(),3);
+    //    RecyclerView.LayoutManager  mLayoutManager3 = glm3;
 
         gvdoh.setLayoutManager(mLayoutManager1);
-        gvrash.setLayoutManager(mLayoutManager2);
-        gvzel.setLayoutManager(mLayoutManager3);
+     //   gvrash.setLayoutManager(mLayoutManager2);
+    //    gvzel.setLayoutManager(mLayoutManager3);
     //   RecyclerView gvrash = (RecyclerView) v.findViewById(R.id.gvrash);
     //   RecyclerView gvzel = (RecyclerView) v.findViewById(R.id.gvzel);
      //   ScrollView scrview = (ScrollView) v.findViewById(R.id.scrview);
 
 
         gvdoh.setAdapter(boxAdapter1);
-        gvrash.setAdapter(boxAdapter2);
-        gvzel.setAdapter(boxAdapter3);
+    //    gvrash.setAdapter(boxAdapter2);
+    //    gvzel.setAdapter(boxAdapter3);
 
      //   final float scale = getActivity().getResources().getDisplayMetrics().density;
      //   int size_gv_doh=(int)Math.ceil(((double)MainActivity.products_doh.size())/3);

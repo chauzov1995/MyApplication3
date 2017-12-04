@@ -10,6 +10,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/new_doh"/>
+
     <TextView
 
         android:id="@+id/tb_red_name"
@@ -64,5 +70,6 @@
         android:background="@color/colorDelete"
         android:text="Удалить"
         android:textColor="#ffffff" />
+
 </LinearLayout>
     </android.support.constraint.ConstraintLayout>
