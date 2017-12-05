@@ -66,11 +66,11 @@ public class fragment_tab extends Fragment {
         // pager.setCurrentItem(datamassiv.size()-1);
 
 
-        pager=(ViewPager) v.findViewById(R.id.pager);
-        pagerAdapter = new MyFragmentPagerAdapter(MainActivity.fm, datamassiv);
-        pager.setAdapter(pagerAdapter);
-        pager.setCurrentItem(datamassiv.size()-1);
-        Log.d("asdad","Восстановлен таб"+(datamassiv.size()-1));
+    //    pager=(ViewPager) v.findViewById(R.id.pager);
+    //    pagerAdapter = new MyFragmentPagerAdapter(MainActivity.fm, datamassiv);
+    //    pager.setAdapter(pagerAdapter);
+    //    pager.setCurrentItem(datamassiv.size()-1);
+     //   Log.d("asdad","Восстановлен таб"+(datamassiv.size()-1));
 
 
 

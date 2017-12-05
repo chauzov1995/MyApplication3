@@ -25,7 +25,7 @@ import android.widget.Toast;
  * Created by nikita on 19.11.2017.
  */
 
-public class dohod_red extends AppCompatActivity {
+public class dohod_red extends Activity {
   Activity tecactivity;
     int id,postoyan_intent,name_dohod_intent;
     EditText doh_red_komment, doh_red_summa;
@@ -36,8 +36,8 @@ public class dohod_red extends AppCompatActivity {
         setContentView(R.layout.dohod_red);
 
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+     //   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      //  getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         tecactivity=this;
          doh_red_komment=(EditText) findViewById(R.id.doh_red_komment);

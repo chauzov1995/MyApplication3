@@ -17,7 +17,7 @@ import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private TextView mTextMessage;
     FragmentTransaction fTrans;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     BoxAdapter boxAdapter;
  static Activity getactivity;
 
-    public static FragmentManager fm;
+  //  public static FragmentManager fm;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        fm = getSupportFragmentManager();
+        //fm = getSupportFragmentManager();
         getactivity=this;
         setContentView(R.layout.activity_main);
 
