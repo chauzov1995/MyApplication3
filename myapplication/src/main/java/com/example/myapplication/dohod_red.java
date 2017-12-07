@@ -8,7 +8,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -25,7 +27,7 @@ import android.widget.Toast;
  * Created by nikita on 19.11.2017.
  */
 
-public class dohod_red extends Activity {
+public class dohod_red extends AppCompatActivity {
   Activity tecactivity;
     int id,postoyan_intent,name_dohod_intent;
     EditText doh_red_komment, doh_red_summa;
@@ -36,9 +38,19 @@ public class dohod_red extends Activity {
         setContentView(R.layout.dohod_red);
 
 
+        // Adding Toolbar to Main screen
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+
+      //  TabLayout tabs = (TabLayout) findViewById(R./id.tabs);
+      //  tabs.addTab(tabs.newTab().setText("Tab 1"));
+      //  tabs.addTab(tabs.newTab().setText("Tab 2"));
+     // /  tabs.addTab(tabs.newTab().setText("Tab 3"));
      //   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
       //  getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+/*
         tecactivity=this;
          doh_red_komment=(EditText) findViewById(R.id.doh_red_komment);
          doh_red_summa=(EditText) findViewById(R.id.doh_red_summa);
@@ -219,7 +231,7 @@ switch(name_dohod){
 
             }
         });
-
+*/
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,6 @@ static boolean lonpower=false;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
          v = inflater.inflate(R.layout.fragment_dohod, null);
-
 
 
 
@@ -76,6 +76,7 @@ static boolean lonpower=false;
 
 
         gvdoh.setAdapter(boxAdapter1);
+        gvdoh.setHasFixedSize(true);
     //    gvrash.setAdapter(boxAdapter2);
     //    gvzel.setAdapter(boxAdapter3);
 
