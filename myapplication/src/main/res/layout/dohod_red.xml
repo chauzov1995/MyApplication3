@@ -23,17 +23,17 @@
 
 
     </android.support.design.widget.AppBarLayout>
-
-    <android.support.v7.widget.RecyclerView
-
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/frgmCont"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#eeeeee"
-        android:paddingTop="4dp"
-        android:paddingBottom="60dp"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
 
 
         <Spinner
@@ -87,7 +87,8 @@
 
             android:background="@color/colorPrimary"
             android:text="Сохранить"
-            android:textColor="#ffffff" />
+            android:textAppearance="@android:style/TextAppearance.Material.Button" />
+
         <Button
             android:id="@+id/doh_del_btn"
             android:layout_width="match_parent"
@@ -95,6 +96,8 @@
 
             android:background="@color/colorDelete"
             android:text="Удалить"
-            android:textColor="#ffffff" />
-    </android.support.v7.widget.RecyclerView>
+            android:textAppearance="@android:style/TextAppearance.Material.Button" />
+
+    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
