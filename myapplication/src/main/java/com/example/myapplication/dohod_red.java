@@ -1,36 +1,44 @@
 package com.example.myapplication;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nikita on 19.11.2017.
  */
 
 public class dohod_red extends AppCompatActivity {
-  Activity tecactivity;
-    int id,postoyan_intent,name_dohod_intent;
+    Activity tecactivity;
+    int id, postoyan_intent, name_dohod_intent;
     EditText doh_red_komment, doh_red_summa;
+    private ViewPager mViewPager;
+    private Toolbar mToolbar;
+    Toolbar toolbar;
+    TabLayout tabLayout;
+    ViewPager pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,36 +46,50 @@ public class dohod_red extends AppCompatActivity {
         setContentView(R.layout.dohod_red);
 
 
-        // Adding Toolbar to Main screen
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
 
 
-      //  TabLayout tabs = (TabLayout) findViewById(R./id.tabs);
-      //  tabs.addTab(tabs.newTab().setText("Tab 1"));
-      //  tabs.addTab(tabs.newTab().setText("Tab 2"));
-     // /  tabs.addTab(tabs.newTab().setText("Tab 3"));
-     //   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-      //  getSupportActionBar().setDisplayShowHomeEnabled(true);
-/*
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+      //  mToolbar.setIcon(R.drawable.ic_launcher);
+     //   mToolbar.setLogo(R.drawable.ic_dashboard_black_24dp);
+
+
+
+        //  TabLayout tabs = (TabLayout) findViewById(R./id.tabs);
+        //  tabs.addTab(tabs.newTab().setText("Tab 1"));
+        //  tabs.addTab(tabs.newTab().setText("Tab 2"));
+        // /  tabs.addTab(tabs.newTab().setText("Tab 3"));
+        //   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //  getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         tecactivity=this;
          doh_red_komment=(EditText) findViewById(R.id.doh_red_komment);
          doh_red_summa=(EditText) findViewById(R.id.doh_red_summa);
         Button doh_red_btn=(Button) findViewById(R.id.doh_red_btn);
-        Button doh_del_btn=(Button) findViewById(R.id.doh_del_btn);
+    //    Button doh_del_btn=(Button) findViewById(R.id.doh_del_btn);
         CheckBox checkBox=(CheckBox) findViewById(R.id.checkBox);
         TextView tb_red_name=(TextView) findViewById(R.id.tb_red_name);
         TextView tb_red_summa=(TextView) findViewById(R.id.tb_red_summa);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
 
+
+
+
+        id= getIntent().getIntExtra("id", 0);
         postoyan_intent=getIntent().getIntExtra("postoyan", 0);
         name_dohod_intent=getIntent().getIntExtra("name_doh", 0);
-        id= getIntent().getIntExtra("id", 0);
 
        doh_red_komment.setText(getIntent().getStringExtra("komment"));
         doh_red_summa.setText(Integer.toString(getIntent().getIntExtra("summa",0))); //NULL POINTER EXCEPTION
+
+
+
+
 
         if(postoyan_intent==1){        checkBox.setChecked(true);}else{
             checkBox.setChecked(false);
@@ -172,77 +194,34 @@ switch(name_dohod){
             }
         });
 
-        doh_del_btn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View r) {
-//удаление
-
-                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(tecactivity);
-                ContentValues cv = new ContentValues();
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 
-
-
-
-
-
-                db.execSQL("UPDATE `an_dohod` SET" +
-                        " `visible`='1'" +
-                        " WHERE id="+Integer.toString(id)+"");
-
-
-
-                Cursor c = db.rawQuery("select * from `an_dohod` Where id='"+String.valueOf(id)+"'", null);
-                c.moveToFirst();
-
-
-                int name_dohod = c.getInt(c.getColumnIndex("name_dohod"));
-                int summa_dohod = c.getInt(c.getColumnIndex("summa_dohod"));
-                int postoyan = c.getInt(c.getColumnIndex("postoyan"));
-
-                String vstavka="";
-                switch(name_dohod){
-                    case 1:
-                        vstavka="`dohod`=dohod-'"+summa_dohod+"'";
-                        break;
-                    case 2:
-                        if(postoyan==1){
-                            vstavka="`rashod`=rashod-'"+summa_dohod+"'";
-                        }else{
-
-                            vstavka="`rashod`=rashod";
-                        }
-                        break;
-                    case 3:
-                        vstavka="`zel`=zel-'"+summa_dohod+"'";
-                        break;
-                }
-
-
-                db.execSQL("UPDATE `an_users` SET "+vstavka);
-                c.close();
-
-
-                finish();
-               // onBackPressed();// возврат на предыдущий activity
-
-
-
-
-            }
-        });
-*/
     }
 
+   // @Override
+  //  public boolean onCreateOptionsMenu(Menu menu) {
+   //     getMenuInflater().inflate(R.menu.menu_main, menu);
+  //      return true;
+   // }
+
+
+
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id =item.getItemId();
+        int id = item.getItemId();
 
-        if(id==android.R.id.home){
+        if (id == android.R.id.home) {
 
             finish();
         }
+        if (id == R.id.action_settings) {
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

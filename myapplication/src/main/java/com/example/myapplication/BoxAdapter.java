@@ -17,6 +17,7 @@ import android.widget.Button;
         import android.widget.ImageView;
         import android.widget.LinearLayout;
         import android.widget.TextView;
+        import android.widget.Toast;
 
         import com.example.myapplication.MainActivity.DBHelper;
 
@@ -209,7 +210,7 @@ public class BoxAdapter extends BaseAdapter {
             button4.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View r) {
 
-
+/*
 if(fragment_dohod.lonpower){
 
     Intent intent = new Intent(getactivity, dohod_red.class);
@@ -220,13 +221,23 @@ if(fragment_dohod.lonpower){
     intent.putExtra("name_doh", p.name_doh);
     getactivity.startActivity(intent);
 }else {
+    */
+                    Toast.makeText(getactivity.getApplicationContext(),
+                            "Пора покормить кота!"+p.komment, Toast.LENGTH_SHORT).show();
+
     Intent intent = new Intent(getactivity, new_dkr_crea.class);
-    intent.putExtra("kuda", p.id);
-    intent.putExtra("name_doh", p.name_doh);
+
+
+
+
+                    intent.putExtra("id", p.id);
+    intent.putExtra("summa", p.suuma_doh);
+    intent.putExtra("komment", p.komment);
     intent.putExtra("postoyan", p.postoyan);
+    intent.putExtra("name_doh", p.name_doh);
     getactivity.startActivity(intent);
 
-}
+//}
 
 
                 }

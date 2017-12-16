@@ -2,10 +2,16 @@ package com.example.myapplication;
 
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,22 +27,36 @@ import java.util.Calendar;
 public class new_dkr_crea extends AppCompatActivity {
 
     Calendar dateAndTime= Calendar.getInstance();
-    int kuda_intent, name_doh_intent, postoyan_intent;
-    String   date;
+    public static int kuda_intent;
+    int  name_doh_intent, postoyan_intent,summa_intent;
+    String   date,komment_intent;
     SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd");
+    Toolbar  mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_dkr_crea);
 
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+  //      getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-         kuda_intent= getIntent().getIntExtra("kuda",0);
+         kuda_intent= getIntent().getIntExtra("id",0);
          name_doh_intent= getIntent().getIntExtra("name_doh",0);
          postoyan_intent= getIntent().getIntExtra("postoyan",0);
+        summa_intent= getIntent().getIntExtra("summa",0);
+        komment_intent= getIntent().getStringExtra("komment");
+
+
+
+
 
 
 
@@ -162,17 +183,63 @@ public class new_dkr_crea extends AppCompatActivity {
 
     }
 
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
-        int id =item.getItemId();
 
-        if(id==android.R.id.home){
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
 
             finish();
         }
+        if(id == R.id.action_delete) {
+            MyDialogFragment myDialogFragment = new MyDialogFragment();
+            FragmentManager manager = getSupportFragmentManager();
+            //myDialogFragment.show(manager, "dialog");
+
+            FragmentTransaction transaction = manager.beginTransaction();
+            myDialogFragment.show(transaction, "dialog");
+
+
+        }
+        if (id == R.id.action_settings) {
+
+
+
+
+
+            finish();
+
+
+              Toast.makeText(getApplicationContext(),
+                     "Пора покормить кота!"+getIntent().getStringExtra("komment"), Toast.LENGTH_SHORT).show();
+
+
+            Intent intent = new Intent(this, dohod_red.class);
+            intent.putExtra("id", getIntent().getIntExtra("id",0));
+            intent.putExtra("summa",getIntent().getIntExtra("summa",0));
+            intent.putExtra("komment", getIntent().getStringExtra("komment"));
+            intent.putExtra("postoyan", getIntent().getIntExtra("postoyan",0));
+            intent.putExtra("name_doh", getIntent().getIntExtra("name_doh",0));
+            startActivity(intent);
+
+
+
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
+
 
 
     private void setInitialDateTime() {
