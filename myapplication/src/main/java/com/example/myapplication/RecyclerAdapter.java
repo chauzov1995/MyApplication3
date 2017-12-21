@@ -3,6 +3,12 @@ package com.example.myapplication;
 
         import android.app.Activity;
         import android.content.Intent;
+        import android.content.res.ColorStateList;
+        import android.graphics.PorterDuff;
+        import android.graphics.drawable.Drawable;
+        import android.os.Build;
+        import android.support.v4.content.ContextCompat;
+        import android.support.v4.graphics.drawable.DrawableCompat;
         import android.support.v7.widget.RecyclerView;
         import android.util.Log;
         import android.view.LayoutInflater;
@@ -111,7 +117,7 @@ default:
 
         switch(p.name_doh){
             case 1:
-                BoxAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_green);
+                RecyclerAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_green);
                 holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_green));
                 holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_green));
                 holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_green));
@@ -120,13 +126,13 @@ default:
             case 2:
 
                 if(p.postoyan==1) {
-                    BoxAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_brown);
+                    RecyclerAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_brown);
                     holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
                     holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
                     holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
                     holder.button4.setBackground( getactivity.getResources().getDrawable(R.drawable.btn_brown_item));
                 }else{
-                    BoxAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_orage);
+                    RecyclerAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_orage);
                     holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
                     holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
                     holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
@@ -134,7 +140,7 @@ default:
                 }
                 break;
             case 3:
-                BoxAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_blue);
+                RecyclerAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_blue);
                 holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_blue));
                 holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_blue));
                 holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_blue));
@@ -210,7 +216,7 @@ break;
 
         Toast.makeText(getactivity,
                 "А теперь выберите карточку для редактировния", Toast.LENGTH_SHORT).show();
-        fragment_dohod.lonpower=true;
+        //fragment_dohod.lonpower=true;
 
     }
 
@@ -226,5 +232,30 @@ break;
 
         return (objects.get(position).new_plus == 1) ? 0 : 1;
 
+    }
+
+
+
+    public static class TintIcons {
+
+        public static Drawable tintIcon(Drawable icon, ColorStateList colorStateList) {
+            if(icon!=null) {
+                icon = DrawableCompat.wrap(icon).mutate();
+                DrawableCompat.setTintList(icon, colorStateList);
+                DrawableCompat.setTintMode(icon, PorterDuff.Mode.SRC_IN);
+            }
+            return icon;
+        }
+
+        public static void tintImageView(ImageView imageView, int colorStateListResId) {
+            ColorStateList list = ContextCompat.getColorStateList(imageView.getContext(), colorStateListResId);
+            if (list != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    imageView.setImageTintList(list);
+                } else {
+                    imageView.setImageDrawable(tintIcon(imageView.getDrawable(), list));
+                }
+            }
+        }
     }
 }

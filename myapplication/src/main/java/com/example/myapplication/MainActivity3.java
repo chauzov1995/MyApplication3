@@ -1,172 +1,133 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
+public class MainActivity3 extends AppCompatActivity {
 
     private TextView mTextMessage;
     FragmentTransaction fTrans;
     statistics frag2;
-
+  //  fragment_dohod fragment_dohod;
     new_dkr New_dkr;
 
     public  static ArrayList<Product> dkr_kart = new ArrayList<Product>();
-    public  static ArrayList<Product> products_doh = new ArrayList<Product>();
+  public  static ArrayList<Product> products_doh = new ArrayList<Product>();
     public  static ArrayList<Product> products_rash = new ArrayList<Product>();
     public  static ArrayList<Product> products_zel = new ArrayList<Product>();
     public  static ArrayList<History> history = new ArrayList<History>();
-    MainActivity3.DBHelper dbHelper;
+    DBHelper dbHelper;
+
+ static Activity getactivity;
+
+  //  public static FragmentManager fm;
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            fTrans = getFragmentManager().beginTransaction();
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+
+                  //  Fragment_tab.onResume();
+                    setTitle("Отчёт по дням");
+
+                    fTrans.replace(R.id.frgmCont, new fragment_tab());
+                    fTrans.commit();
+
+                    return true;
+                case R.id.navigation_notifications:
+                    // mTextMessage.setText(R.string.title_notifications);
 
 
 
+                    setTitle("Конверты");
+                 //   fTrans.replace(R.id.frgmCont, fragment_dohod);
+                 //   fTrans.addToBackStack(null);
+                    fTrans.commit();
+                    return true;
+                case R.id.navigation_dashboard:
+                  //  mTextMessage.setText(R.string.title_dashboard);
 
+                    setTitle("Статистика");
+                    fTrans.replace(R.id.frgmCont, frag2);
+                  //  fTrans.addToBackStack(null);
+                    fTrans.commit();
+                    return true;
+
+            }
+
+            return false;
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        //fm = getSupportFragmentManager();
+        getactivity=this;
+        setContentView(R.layout.activity_main4);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
+      //  mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-
-
-
-
-
-
-        //  Fragment_tab = new fragment_tab();
-        dbHelper = new MainActivity3.DBHelper(this);
+        fTrans = getFragmentManager().beginTransaction();
+            frag2 = new statistics();
+      //      fragment_dohod = new fragment_dohod();
+            New_dkr = new new_dkr();
+      //  Fragment_tab = new fragment_tab();
+dbHelper = new DBHelper(this);
 
 
         setTitle("Отчёт по дням");
 
-        //fTrans.replace(R.id.frgntm, new fragment_dohod());
-      //  fTrans.commit();
+        fTrans.replace(R.id.frgmCont, new fragment_tab());
+        fTrans.commit();
 
+
+        //fragment_tab = new fragment_tab();
+
+
+     //   Intent intent = new Intent(getactivity, TABBED.class);
+
+     //   getactivity.startActivity(intent);
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MainActivity.loadcart(this);
-
-        RecyclerAdapter  boxAdapter1 = new RecyclerAdapter(MainActivity.products_doh, this);
-     RecyclerView gvdoh = (RecyclerView) findViewById(R.id.gvdoh);
-        GridLayoutManager glm1=new GridLayoutManager(this,3);
-        RecyclerView.LayoutManager  mLayoutManager1 = glm1;
-
-        gvdoh.setLayoutManager(mLayoutManager1);
-
-        gvdoh.setAdapter(boxAdapter1);
-        gvdoh.setHasFixedSize(true);
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
 
-        fTrans = getFragmentManager().beginTransaction();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
 
 
-            Intent intent = new Intent(this, report_day.class);
-
-            startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
 
     public static void loadcart(Context context){
 
-        MainActivity3.DBHelper dbHelper = new MainActivity3.DBHelper(context);
+        DBHelper dbHelper = new DBHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         products_doh.clear();
         products_rash.clear();
@@ -214,9 +175,9 @@ switch (c.getInt(name_dohod)){
 
         products_doh.add(new Product("Добавить доход", 0,
                 0, 0, 1, 1, 0));
-        //   products_rash.add(new Product("Добавить расход", 0,
-        //          0, 0, 2, 1, 0));
-        //   products_zel.add(new Product("Добавить цель", 0,
+     //   products_rash.add(new Product("Добавить расход", 0,
+      //          0, 0, 2, 1, 0));
+     //   products_zel.add(new Product("Добавить цель", 0,
         //        0, 0, 3, 1,0));
         c.close();
 
@@ -227,7 +188,7 @@ switch (c.getInt(name_dohod)){
 
     public static void load_dkr_cart(Context context){
 
-        MainActivity3.DBHelper dbHelper = new MainActivity3.DBHelper(context);
+        DBHelper dbHelper = new DBHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         dkr_kart.clear();
 
@@ -252,8 +213,8 @@ switch (c.getInt(name_dohod)){
             do {
 
 
-                dkr_kart.add(new Product(c.getString(komment), c.getInt(summa_dohod),
-                        c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0, c.getInt(postoyan)));
+                        dkr_kart.add(new Product(c.getString(komment), c.getInt(summa_dohod),
+                                c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0, c.getInt(postoyan)));
 
 
                 // переход на следующую строку
@@ -271,7 +232,7 @@ switch (c.getInt(name_dohod)){
 
     public static void loadhist(Context context){
 
-        MainActivity3.DBHelper dbHelper = new MainActivity3.DBHelper(context);
+        DBHelper dbHelper = new DBHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         history.clear();
 
@@ -321,7 +282,32 @@ switch (c.getInt(name_dohod)){
 
 
 
-    public static class  DBHelper extends SQLiteOpenHelper {
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+      //  loadcart(this);
+     //   fragment_dohod = new fragment_dohod();
+           //  Toast.makeText(getApplicationContext(),
+          //         "Пора покормить кота!", Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   public static class  DBHelper extends SQLiteOpenHelper {
 
         public DBHelper(Context context) {
             // конструктор суперкласса
@@ -346,13 +332,13 @@ switch (c.getInt(name_dohod)){
                     "  `visible` int(11) NOT NULL ,\n" +
                     "  `postoyan` int(11) NOT NULL\n" +
                     ");");
-            db.execSQL(" CREATE TABLE `an_dkr_hist` (\n" +
+                    db.execSQL(" CREATE TABLE `an_dkr_hist` (\n" +
                     "  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
                     "  `kuda` int(11) NOT NULL,\n" +
                     "  `summa` decimal(10,0) NOT NULL,\n" +
                     "  `komment` varchar(255) NOT NULL,\n" +
                     "  `data_fakt` varchar(255) NOT NULL,\n" +
-                    "  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
+                   "  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
                     "  `visible` int(11) NOT NULL,\n" +
                     "  `postoyan` int(11) NOT NULL,\n" +
                     "  `name_dohod` int(11) NOT NULL\n" +
@@ -368,7 +354,7 @@ switch (c.getInt(name_dohod)){
                     "  `vsego_mes_potr` decimal(10,0) NOT NULL,\n" +
                     "  `vsego_mes_zarab` int(11) NOT NULL,\n" +
                     "  `balance` decimal(10,0) NOT NULL\n" +
-                    ");");
+                                     ");");
 
 
 
@@ -410,7 +396,7 @@ switch (c.getInt(name_dohod)){
 
 
             //   Toast.makeText(getactivity,
-            //          Long.toString(rowID), Toast.LENGTH_SHORT).show();
+          //          Long.toString(rowID), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -422,6 +408,31 @@ switch (c.getInt(name_dohod)){
 
         }
     }
-}
 
+/*
+
+    public class Product {
+
+        String komment;
+        int suuma_doh;
+        int suuma_fakt;
+        int id;
+        int  name_doh;
+        int  new_plus;
+
+
+        Product(String _komment, int _suuma_doh, int _suuma_fakt, int _id, int _name_doh, int _new_plus) {
+            komment = _komment;
+            suuma_doh = _suuma_doh;
+            suuma_fakt = _suuma_fakt;
+            id = _id;
+            name_doh = _name_doh;
+            new_plus=_new_plus;
+        }
+    }
+
+*/
+
+
+}
 
