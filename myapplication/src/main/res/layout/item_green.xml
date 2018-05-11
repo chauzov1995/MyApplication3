@@ -67,7 +67,7 @@
         android:layout_marginTop="3dp"
         android:background="@drawable/btn_green_item"
         android:elegantTextHeight="false"
-        android:text="Добавить"
+        android:text="Учёт"
         android:textColor="#ffffff"
         android:textSize="10sp"
         android:textAllCaps="false"/>

@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.myapplication.MainActivity.DBHelper;
 
 import java.util.ArrayList;
 
@@ -33,7 +32,7 @@ import java.util.ArrayList;
         com.example.myapplication.new_dohod new_Dohod;
 
 
-        MainActivity.DBHelper dbHelper;
+        DB_sql dbHelper;
 
         history_adapter(Context context, ArrayList<History> products, Activity _getactivity) {
             ctx = context;

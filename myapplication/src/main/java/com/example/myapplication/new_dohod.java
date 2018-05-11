@@ -3,18 +3,23 @@ package com.example.myapplication;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
 /**
  * Created by nikita on 19.11.2017.
@@ -23,118 +28,97 @@ import android.widget.TextView;
 public class new_dohod extends AppCompatActivity {
 
 
-    int name_dohod;
+    int name_dohod = 1;
     Activity tecactivity;
+    Context thiscont;
+
+
+    TextView tb_red_name;
+    TextView tb_red_summa;
+    CheckBox checkBox;
+    Button button5;
+    EditText editText4;
+    EditText editText5;
+    Spinner spinner;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dohod_red);
 
-
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //     getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        tecactivity=this;
-      //  name_dohod= getIntent().getIntExtra("name_dohod", 0);
+        tecactivity = this;
+        thiscont=this;
+        //  name_dohod= getIntent().getIntExtra("name_dohod", 0);
 
 
-        CheckBox checkBox=(CheckBox) findViewById(R.id.checkBox);
-        TextView tb_red_name=(TextView) findViewById(R.id.tb_red_name);
-        TextView tb_red_summa=(TextView) findViewById(R.id.tb_red_summa);
-        Button doh_del_btn=(Button) findViewById(R.id.doh_del_btn);
-        Button button5=(Button) findViewById(R.id.doh_red_btn);
-
+        tb_red_name = (TextView) findViewById(R.id.tb_red_name);
+        tb_red_summa = (TextView) findViewById(R.id.tb_red_summa);
+        checkBox = (CheckBox) findViewById(R.id.checkBox);
+        button5 = (Button) findViewById(R.id.doh_red_btn);
+        editText4 = (EditText) findViewById(R.id.doh_red_komment);
+        editText5 = (EditText) findViewById(R.id.doh_red_summa);
+        spinner = (Spinner) findViewById(R.id.spinner);
 
 
         button5.setText("Создать");
-        doh_del_btn.setVisibility(View.GONE);
-        checkBox.setVisibility(View.GONE);
-
-        /*
-        switch(name_dohod) {
-            case 1:
-                tb_red_name.setText("Название дохода");
-                tb_red_summa.setText("Сколько планируете получать?");
-                break;
-            case 2:
-                tb_red_name.setText("На что планируете тратить?");
-                tb_red_summa.setText("Сколько планируете тратить?");
 
 
 
 
+        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                break;
-            case 3:
-                tb_red_name.setText("На что копим?");
-                tb_red_summa.setText("Сколько планируете откладывать средств ежемесячно?");
-                break;
+                // Получаем выбранный объект
+                String item = (String) parent.getItemAtPosition(position);
+                checkBox.setVisibility(View.GONE);
+                if (item.equals( "Расход")) {
+                   checkBox.setVisibility(View.VISIBLE);
+               }
 
+            }
 
-        }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-*/
+            }
+        });
+
 
         button5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
-                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(tecactivity);
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
+                DB_sql dbHelper = new DB_sql(tecactivity);
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                Spinner spinner = (Spinner) findViewById(R.id.spinner);
+
                 String selected = spinner.getSelectedItem().toString();
-                switch(selected){
+                switch (selected) {
                     case "Доход":
-                        name_dohod=1;
+                        name_dohod = 1;
                         break;
                     case "Расход":
-                        name_dohod=2;
+                        name_dohod = 2;
                         break;
                     case "Цель":
-                        name_dohod=3;
+                        name_dohod = 3;
                         break;
-
-
                 }
 
 
-                EditText editText4=(EditText) findViewById(R.id.doh_red_komment);
-                EditText editText5=(EditText) findViewById(R.id.doh_red_summa);
-
-                int postoyan_post=0;
-                if(((CheckBox) findViewById(R.id.checkBox)).isChecked()) postoyan_post=1;
-
+                int postoyan_post = 0;
+                if (((CheckBox) findViewById(R.id.checkBox)).isChecked()) postoyan_post = 1;
 
 
                 db.execSQL("INSERT INTO `an_dohod`" +
                         "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`, `postoyan`) VALUES" +
-                        " ('"+name_dohod+"','"+Integer.parseInt(editText5.getText().toString())+"',0,'"+editText4.getText().toString()+"',0,'"+postoyan_post+"')");
+                        " ('" + name_dohod + "','" + Integer.parseInt(editText5.getText().toString()) + "',0,'" + editText4.getText().toString() + "',0,'" + postoyan_post + "')");
 
 
-
-
-
-
-                String vstavka="";
-                switch(name_dohod){
-                    case 1:
-                        vstavka="`dohod`=dohod+'"+editText5.getText()+"'";
-                        break;
-                    case 2:
-                        if(postoyan_post==1){
-                            vstavka="`rashod`=rashod+'"+editText5.getText()+"'";
-                       }else {
-                            vstavka="`rashod`=rashod";
-                                            }
-                        break;
-                    case 3:
-                        vstavka="`zel`=zel+'"+editText5.getText()+"'";
-                        break;
-                }
-
-
-                db.execSQL("UPDATE `an_users` SET "+vstavka);
-
-            //    MainActivity.loadcart(tecactivity);
-             //   tecactivity.onBackPressed();// возврат на предыдущий activity
                 finish();
             }
         });
@@ -142,11 +126,11 @@ public class new_dohod extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id =item.getItemId();
+        int id = item.getItemId();
 
-        if(id==android.R.id.home){
+        if (id == android.R.id.home) {
 
             finish();
         }

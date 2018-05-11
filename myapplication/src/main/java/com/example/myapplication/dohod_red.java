@@ -49,7 +49,7 @@ public class dohod_red extends AppCompatActivity {
 
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+      // BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -124,7 +124,7 @@ switch(name_dohod_intent) {
         doh_red_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
 //обвление
-                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(tecactivity);
+                DB_sql dbHelper = new DB_sql(tecactivity);
                 ContentValues cv = new ContentValues();
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 

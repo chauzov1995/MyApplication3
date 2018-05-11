@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -22,7 +21,7 @@ public class report_day extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main333);
+        setContentView(R.layout.report_day);
 
 
         Toolbar  mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -33,7 +32,7 @@ public class report_day extends AppCompatActivity {
 
 
 
-        MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(this);
+        DB_sql dbHelper = new DB_sql(this);
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 

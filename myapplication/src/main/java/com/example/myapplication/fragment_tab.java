@@ -31,14 +31,14 @@ public class fragment_tab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.activity_main333, null);
+        v = inflater.inflate(R.layout.report_day, null);
 
 
 
 
 
 
-        MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(getActivity());
+        DB_sql dbHelper = new DB_sql(getActivity());
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 

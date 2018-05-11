@@ -1,24 +1,17 @@
 package com.example.myapplication;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import com.example.myapplication.MainActivity.DBHelper;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,15 +20,15 @@ import java.util.Calendar;
 public class dkr_konv_adapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
-    ArrayList<Product> objects;
+    ArrayList<Dohod> objects;
     Activity getactivity;
 String date;
     com.example.myapplication.new_dohod new_Dohod;
 
 
-    DBHelper dbHelper;
+    DB_sql dbHelper;
 
-    dkr_konv_adapter(Context context, ArrayList<Product> products, Activity _getactivity, String _date) {
+    dkr_konv_adapter(Context context, ArrayList<Dohod> products, Activity _getactivity, String _date) {
         ctx = context;
         objects = products;
         lInflater = (LayoutInflater) ctx
@@ -68,7 +61,7 @@ String date;
         // используем созданные, но не используемые view
         View view = convertView;
 
-        final Product p = getProduct(position);
+        final Dohod p = getProduct(position);
 
 
             if (view == null) {
@@ -88,7 +81,7 @@ switch (p.name_doh) {
         dkr_item_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
 
-                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(getactivity);
+                DB_sql dbHelper = new DB_sql(getactivity);
                 ContentValues cv = new ContentValues();
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -152,8 +145,8 @@ switch (p.name_doh) {
     }
 
     // товар по позиции
-    Product getProduct(int position) {
-        return ((Product) getItem(position));
+    Dohod getProduct(int position) {
+        return ((Dohod) getItem(position));
     }
 
     @Override

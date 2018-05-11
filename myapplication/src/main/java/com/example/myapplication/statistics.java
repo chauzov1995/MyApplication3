@@ -36,7 +36,7 @@ public class statistics extends Fragment {
         super.onResume();
 
 
-        MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(getActivity());
+        DB_sql dbHelper = new DB_sql(getActivity());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 

@@ -3,7 +3,7 @@ package com.example.myapplication;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Product   {
+public class Dohod {
 
     String komment;
      int suuma_doh;
@@ -13,7 +13,7 @@ public class Product   {
       int  new_plus;
     int postoyan;
 
-    Product(String _komment, int _suuma_doh, int _suuma_fakt, int _id, int _name_doh, int _new_plus, int _postoyan) {
+    Dohod(String _komment, int _suuma_doh, int _suuma_fakt, int _id, int _name_doh, int _new_plus, int _postoyan) {
         komment = _komment;
         suuma_doh = _suuma_doh;
         suuma_fakt = _suuma_fakt;

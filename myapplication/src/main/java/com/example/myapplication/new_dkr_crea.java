@@ -40,7 +40,7 @@ public class new_dkr_crea extends AppCompatActivity {
 
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+       // BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -123,7 +123,7 @@ public class new_dkr_crea extends AppCompatActivity {
 
     void create_dkr( ){
 
-        MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(new_dkr_crea.this);
+        DB_sql dbHelper = new DB_sql(new_dkr_crea.this);
         ContentValues cv = new ContentValues();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 

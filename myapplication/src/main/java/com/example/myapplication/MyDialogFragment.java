@@ -31,7 +31,7 @@ public class MyDialogFragment extends DialogFragment {
 
                 int id= new_dkr_crea.kuda_intent;
 
-                MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(getActivity());
+                DB_sql dbHelper = new DB_sql(getActivity());
                 ContentValues cv = new ContentValues();
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 

@@ -67,7 +67,7 @@ public class red_dkr extends AppCompatActivity {
              public void onClick(View r) {
 
 
-                 MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(red_dkr.this);
+                 DB_sql dbHelper = new DB_sql(red_dkr.this);
                  ContentValues cv = new ContentValues();
                  SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -141,7 +141,7 @@ public class red_dkr extends AppCompatActivity {
         del_dkr.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
 
-               MainActivity.DBHelper dbHelper = new MainActivity.DBHelper(red_dkr.this);
+                DB_sql dbHelper = new DB_sql(red_dkr.this);
                ContentValues cv = new ContentValues();
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 

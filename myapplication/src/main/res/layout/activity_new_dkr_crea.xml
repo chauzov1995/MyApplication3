@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-
-        />
-
-
-
+        android:background="?attr/colorPrimary" />
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/frgmCont"
@@ -27,102 +19,101 @@
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Сумма" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberSigned" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Комментарий" />
-
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            />
-        <Button
-            android:id="@+id/crea_dkr_save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/colorPrimary"
-            android:text="Изменить"
-            android:textColor="#ffffff"/>
-
-        <Button
-            android:id="@+id/del_dkr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/colorDelete"
-            android:text="Удалить"
-            android:textColor="#ffffff"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:orientation="horizontal">
+                android:text="Сумма" />
 
-                <Button
-                    android:id="@+id/crea_dkr_kal"
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberSigned" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Комментарий" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/crea_dkr_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/colorPrimary"
+                android:text="Изменить"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/del_dkr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/colorDelete"
+                android:text="Удалить"
+                android:textColor="#ffffff" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal">
 
-                    android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="Календарь"
-                    android:textColor="#ffffff" />
+                    <Button
+                        android:id="@+id/crea_dkr_kal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-
-                <Button
-                    android:id="@+id/crea_dkr_to"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="Вчера"
-                    android:textColor="#ffffff" />
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:text="Календарь"
+                        android:textColor="#ffffff" />
 
 
-                <Button
-                    android:id="@+id/crea_dkr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    <Button
+                        android:id="@+id/crea_dkr_to"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-                    android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="Сегодня"
-                    android:textColor="#ffffff" />
-            </LinearLayout>
-        </RelativeLayout>
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:text="Вчера"
+                        android:textColor="#ffffff" />
 
 
-    </LinearLayout>
+                    <Button
+                        android:id="@+id/crea_dkr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:text="Сегодня"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
+            </RelativeLayout>
+
+
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
