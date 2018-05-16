@@ -2,16 +2,22 @@ package com.example.myapplication;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,12 +32,13 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
 
-    ArrayList<Dohod> objects;
-    Activity getactivity;
+    static ArrayList<Dohod> objects;
+    static Activity getactivity;
 
     // класс view holder-а с помощью которого мы получаем ссылку на каждый элемент
     // отдельного пункта списка
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener,
+            MenuItem.OnMenuItemClickListener {
         // наш пункт состоит только из одного TextView
         public TextView tvText, tvText3, textView4, textView5, textView6;
         public Button button4;
@@ -53,25 +60,76 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             button4 = (Button) v.findViewById(R.id.button4);
             llnp = (LinearLayout) v.findViewById(R.id.llnp);
             llitem = (LinearLayout) v.findViewById(R.id.llitem);
-
+            //   v.setOnClickListener(this);
             v.setOnCreateContextMenuListener(this);
+
+
         }
+
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             menu.setHeaderTitle("Что сделать?");
-            menu.add(0, v.getId(), 0, "Редактировать");//groupId, itemId, order, title
-            menu.add(0, v.getId(), 0, "Удалить");
+
+            MenuItem red = menu.add(this.getAdapterPosition(), v.getId(), 0, "Редактировать");//groupId, itemId, order, title
+            MenuItem del = menu.add(this.getAdapterPosition(), v.getId(), 0, "Удалить");
+
+            red.setOnMenuItemClickListener(this);
+            del.setOnMenuItemClickListener(this);
+
         }
+
+        @Override
+        public boolean onMenuItemClick(final MenuItem item) {
+            // Menu Item Clicked!
+
+            final Dohod d = objects.get(item.getGroupId());
+            switch (item.getTitle().toString()) {
+                case "Редактировать":
+                    String komment = objects.get(item.getGroupId()).komment;
+                    Log.d("asdasd", "onMenuItemClick1: " + komment);
+
+                    break;
+                case "Удалить":
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getactivity);
+                    builder.setTitle("Важное сообщение!")
+                            .setMessage("Покормите кота!")
+                            .setCancelable(true)
+                            .setNegativeButton("Отмена",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    }).setPositiveButton("Удалить",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                    DB_sql dbHelper = new DB_sql(getactivity);
+                                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+
+                                    db.execSQL("UPDATE `an_dohod` SET `visible`=1 WHERE" +
+                                            " id='"+d.id+"'");
+
+                                   // getactivity.resume
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    break;
+            }
+            return true;
+        }
+
+
     }
+
 
     // Конструктор
     public RecyclerAdapter(ArrayList<Dohod> _objects, Activity _getactivity) {
         objects = _objects;
         getactivity = _getactivity;
     }
-
-
 
 
     // Создает новые views (вызывается layout manager-ом)
@@ -115,7 +173,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                     public void onClick(View r) {
 
                         Intent intent = new Intent(getactivity, new_dohod.class);
-                                            getactivity.startActivity(intent);
+                        getactivity.startActivity(intent);
 
                     }
 
@@ -174,9 +232,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 });
 
 
-
                 break;
         }
+
 
     }
 
@@ -207,8 +265,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public int getItemViewType(int position) {
         return (objects.get(position).new_plus == 1) ? 0 : 1;
     }
-
-
 
 
     public static class TintIcons {
