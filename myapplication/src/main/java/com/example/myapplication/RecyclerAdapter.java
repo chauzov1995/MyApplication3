@@ -86,8 +86,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             final Dohod d = objects.get(item.getGroupId());
             switch (item.getTitle().toString()) {
                 case "Редактировать":
-                    String komment = objects.get(item.getGroupId()).komment;
-                    Log.d("asdasd", "onMenuItemClick1: " + komment);
+
+                    int id = objects.get(item.getGroupId()).id;
+
+
+                    Intent intent = new Intent(getactivity, new_dohod.class);
+                    intent.putExtra("id", id);
+                    getactivity.startActivity(intent);
+                    // Log.d("asdasd", "onMenuItemClick1: " + komment);
 
                     break;
                 case "Удалить":
@@ -109,9 +115,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
 
                                     db.execSQL("UPDATE `an_dohod` SET `visible`=1 WHERE" +
-                                            " id='"+d.id+"'");
+                                            " id='" + d.id + "'");
 
-                                   // getactivity.resume
+                                    // getactivity.resume
                                 }
                             });
                     AlertDialog alert = builder.create();

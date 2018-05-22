@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,13 +22,15 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Created by nikita on 19.11.2017.
  */
 
 public class new_dohod extends AppCompatActivity {
 
-
+    int id_prihod;
     int name_dohod = 1;
     Activity tecactivity;
     Context thiscont;
@@ -52,6 +55,10 @@ public class new_dohod extends AppCompatActivity {
         //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //     getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        id_prihod= getIntent().getIntExtra("id",0);
+
+
+
         tecactivity = this;
         thiscont=this;
         //  name_dohod= getIntent().getIntExtra("name_dohod", 0);
@@ -64,9 +71,44 @@ public class new_dohod extends AppCompatActivity {
         editText4 = (EditText) findViewById(R.id.doh_red_komment);
         editText5 = (EditText) findViewById(R.id.doh_red_summa);
         spinner = (Spinner) findViewById(R.id.spinner);
-
-
         button5.setText("Создать");
+
+
+        if(id_prihod>0){
+
+
+
+            DB_sql dbHelper = new DB_sql(this);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            // делаем запрос всех данных из таблицы mytable, получаем Cursor
+            Cursor c = db.rawQuery("select * from `an_dohod` Where id="+id_prihod, null);
+            // ставим позицию курсора на первую строку выборки
+            // если в выборке нет строк, вернется false
+       //     ArrayList<Dohod> products_doh = new ArrayList<Dohod>();
+            if (c.moveToFirst()) {
+
+                // определяем номера столбцов по имени в выборке
+             //   int id = c.getColumnIndex("id");
+                int summa_dohod = c.getColumnIndex("summa_dohod");
+           //     int summa_fakt = c.getColumnIndex("summa_fakt");
+                int komment = c.getColumnIndex("komment");
+                int name_dohod = c.getColumnIndex("name_dohod");
+                int postoyan = c.getColumnIndex("postoyan");
+
+
+                do {
+
+                    editText4.setText(c.getString(komment));
+                            editText5.setText(c.getInt(summa_dohod));
+
+                   // products_doh.add(new Dohod(c.getString(komment), c.getInt(summa_dohod),
+                   //         c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0, c.getInt(postoyan)));
+                    // переход на следующую строку
+                    // а если следующей нет (текущая - последняя), то false - выходим из цикла
+                } while (c.moveToNext());
+            }
+        }
 
 
 
