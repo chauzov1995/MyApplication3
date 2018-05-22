@@ -24,7 +24,7 @@ import com.example.myapplication.R;
  * Created by nikita on 19.11.2017.
  */
 
-public class new_dohod extends AppCompatActivity {
+public class dohod_redak extends AppCompatActivity {
 
     int id_prihod;
     int name_dohod = 1;

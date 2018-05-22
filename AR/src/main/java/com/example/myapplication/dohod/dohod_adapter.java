@@ -30,10 +30,10 @@ import com.example.myapplication.dkr.new_dkr_crea;
 import java.util.ArrayList;
 
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class dohod_adapter extends RecyclerView.Adapter<dohod_adapter.ViewHolder> {
 
 
-    static ArrayList<Dohod> objects;
+    static ArrayList<dohod_class> objects;
     static Activity getactivity;
 
     // класс view holder-а с помощью которого мы получаем ссылку на каждый элемент
@@ -84,14 +84,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         public boolean onMenuItemClick(final MenuItem item) {
             // Menu Item Clicked!
 
-            final Dohod d = objects.get(item.getGroupId());
+            final dohod_class d = objects.get(item.getGroupId());
             switch (item.getTitle().toString()) {
                 case "Редактировать":
 
                     int id = objects.get(item.getGroupId()).id;
 
 
-                    Intent intent = new Intent(getactivity, new_dohod.class);
+                    Intent intent = new Intent(getactivity, dohod_redak.class);
                     intent.putExtra("id", id);
                     getactivity.startActivity(intent);
                     // Log.d("asdasd", "onMenuItemClick1: " + komment);
@@ -133,7 +133,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
 
     // Конструктор
-    public RecyclerAdapter(ArrayList<Dohod> _objects, Activity _getactivity) {
+    public dohod_adapter(ArrayList<dohod_class> _objects, Activity _getactivity) {
         objects = _objects;
         getactivity = _getactivity;
     }
@@ -141,7 +141,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     // Создает новые views (вызывается layout manager-ом)
     @Override
-    public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public dohod_adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         ViewHolder vh;
         View v;
@@ -169,7 +169,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     // Заменяет контент отдельного view (вызывается layout manager-ом)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Dohod p = objects.get(position);
+        final dohod_class p = objects.get(position);
 
 
         switch (this.getItemViewType(position)) {
@@ -179,7 +179,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 holder.llnp.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View r) {
 
-                        Intent intent = new Intent(getactivity, new_dohod.class);
+                        Intent intent = new Intent(getactivity, dohod_redak.class);
                         getactivity.startActivity(intent);
 
                     }
@@ -191,7 +191,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
                 switch (p.name_doh) {
                     case 1:
-                        RecyclerAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_green);
+                        dohod_adapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_green);
                         holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_green));
                         holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_green));
                         holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_green));
@@ -200,13 +200,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                     case 2:
 
                         if (p.postoyan == 1) {
-                            RecyclerAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_brown);
+                            dohod_adapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_brown);
                             holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
                             holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
                             holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
                             holder.button4.setBackground(getactivity.getResources().getDrawable(R.drawable.btn_brown_item));
                         } else {
-                            RecyclerAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_orage);
+                            dohod_adapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_orage);
                             holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
                             holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
                             holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
@@ -214,7 +214,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                         }
                         break;
                     case 3:
-                        RecyclerAdapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_blue);
+                        dohod_adapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_blue);
                         holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_blue));
                         holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_blue));
                         holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_blue));
@@ -246,7 +246,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
 
-    void click_cart(Dohod p) {
+    void click_cart(dohod_class p) {
 
 
         Intent intent = new Intent(getactivity, new_dkr_crea.class);

@@ -21,13 +21,13 @@ import android.widget.TextView;
 import com.example.myapplication.DB_sql;
 import com.example.myapplication.R;
 import com.example.myapplication.history.history_class;
-import com.example.myapplication.dkr.new_dkr;
+
 import com.example.myapplication.reports.report_day;
 import com.example.myapplication.reports.statistics;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity
+public class dodod_activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity
     FragmentTransaction fTrans;
     statistics frag2;
 
-    new_dkr New_dkr;
 
-    public static ArrayList<Dohod> dkr_kart = new ArrayList<Dohod>();
+
+    public static ArrayList<dohod_class> dkr_kart = new ArrayList<dohod_class>();
 
 
     public static ArrayList<history_class> history = new ArrayList<history_class>();
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         Cursor c = db.rawQuery("select * from `an_dohod` Where visible=0", null);
         // ставим позицию курсора на первую строку выборки
         // если в выборке нет строк, вернется false
-        ArrayList<Dohod> products_doh = new ArrayList<Dohod>();
+        ArrayList<dohod_class> products_doh = new ArrayList<dohod_class>();
         if (c.moveToFirst()) {
 
             // определяем номера столбцов по имени в выборке
@@ -87,20 +87,20 @@ public class MainActivity extends AppCompatActivity
 
 
             do {
-                products_doh.add(new Dohod(c.getString(komment), c.getInt(summa_dohod),
+                products_doh.add(new dohod_class(c.getString(komment), c.getInt(summa_dohod),
                         c.getInt(summa_fakt), c.getInt(id), c.getInt(name_dohod), 0, c.getInt(postoyan)));
                 // переход на следующую строку
                 // а если следующей нет (текущая - последняя), то false - выходим из цикла
             } while (c.moveToNext());
         }
 
-        products_doh.add(new Dohod("Добавить доход", 0,
+        products_doh.add(new dohod_class("Добавить доход", 0,
                 0, 0, 1, 1, 0));
 
         c.close();
 
 
-        RecyclerAdapter boxAdapter1 = new RecyclerAdapter(products_doh, this);
+        dohod_adapter boxAdapter1 = new dohod_adapter(products_doh, this);
         RecyclerView gvdoh = (RecyclerView) findViewById(R.id.gvdoh);
         GridLayoutManager glm1 = new GridLayoutManager(this, 3);
         RecyclerView.LayoutManager mLayoutManager1 = glm1;

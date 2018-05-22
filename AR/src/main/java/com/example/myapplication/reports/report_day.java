@@ -12,9 +12,9 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.myapplication.DB_sql;
-import com.example.myapplication.dkr.PageFragment;
+import com.example.myapplication.history.PageFragment;
 import com.example.myapplication.R;
-import com.example.myapplication.dohod.MainActivity;
+import com.example.myapplication.dohod.dodod_activity;
 
 import java.util.ArrayList;
 
@@ -52,7 +52,7 @@ public class report_day extends AppCompatActivity {
 
 
         c.close();
-        MainActivity.loadhist(this);
+        dodod_activity.loadhist(this);
 
 
         Log.d("asdas", "asdasd" + c.getCount());

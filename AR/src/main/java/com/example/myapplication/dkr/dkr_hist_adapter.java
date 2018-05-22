@@ -14,8 +14,8 @@ import android.widget.EditText;
 
 import com.example.myapplication.DB_sql;
 import com.example.myapplication.R;
-import com.example.myapplication.dohod.Dohod;
-import com.example.myapplication.dohod.new_dohod;
+import com.example.myapplication.dohod.dohod_class;
+import com.example.myapplication.dohod.dohod_redak;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,15 +24,15 @@ import java.util.Calendar;
 public class dkr_hist_adapter extends BaseAdapter {
     Context ctx;
     LayoutInflater lInflater;
-    ArrayList<Dohod> objects;
+    ArrayList<dohod_class> objects;
     Activity getactivity;
     String date;
-    new_dohod new_Dohod;
+    dohod_redak new_Dohod;
 
 
     DB_sql dbHelper;
 
-    dkr_hist_adapter(Context context, ArrayList<Dohod> products, Activity _getactivity, String _date) {
+    dkr_hist_adapter(Context context, ArrayList<dohod_class> products, Activity _getactivity, String _date) {
         ctx = context;
         objects = products;
         lInflater = (LayoutInflater) ctx
@@ -65,7 +65,7 @@ public class dkr_hist_adapter extends BaseAdapter {
         // используем созданные, но не используемые view
         View view = convertView;
 
-        final Dohod p = getProduct(position);
+        final dohod_class p = getProduct(position);
 
 
         if (view == null) {
@@ -142,8 +142,8 @@ public class dkr_hist_adapter extends BaseAdapter {
     }
 
     // товар по позиции
-    Dohod getProduct(int position) {
-        return ((Dohod) getItem(position));
+    dohod_class getProduct(int position) {
+        return ((dohod_class) getItem(position));
     }
 
     @Override

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.myapplication.DB_sql;
 import com.example.myapplication.R;
 import com.example.myapplication.dkr.red_dkr;
-import com.example.myapplication.dohod.new_dohod;
+import com.example.myapplication.dohod.dohod_redak;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class history_adapter extends BaseAdapter {
     ArrayList<history_class> objects;
     Activity getactivity;
 
-    new_dohod new_Dohod;
+    dohod_redak new_Dohod;
 
 
     DB_sql dbHelper;

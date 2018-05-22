@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.history;
 
 import android.app.Fragment;
 import android.database.Cursor;
@@ -13,8 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.dkr.PageFragment;
-import com.example.myapplication.dohod.MainActivity;
+import com.example.myapplication.DB_sql;
+import com.example.myapplication.R;
+import com.example.myapplication.dohod.dodod_activity;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ import java.util.ArrayList;
  * Created by nikita on 27.11.2017.
  */
 
-public class fragment_tab extends Fragment {
+public class history_activity extends Fragment {
 
 
     View v;
@@ -55,7 +56,7 @@ public class fragment_tab extends Fragment {
 
 
         c.close();
-        MainActivity.loadhist(getActivity());
+        dodod_activity.loadhist(getActivity());
 
 
         Log.d("asdas", "asdasd" + c.getCount());

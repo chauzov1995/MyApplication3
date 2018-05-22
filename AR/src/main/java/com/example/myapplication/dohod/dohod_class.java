@@ -1,6 +1,6 @@
 package com.example.myapplication.dohod;
 
-public class Dohod {
+public class dohod_class {
 
     public String komment;
     int suuma_doh;
@@ -10,7 +10,7 @@ public class Dohod {
     public int new_plus;
     public int postoyan;
 
-    Dohod(String _komment, int _suuma_doh, int _suuma_fakt, int _id, int _name_doh, int _new_plus, int _postoyan) {
+    dohod_class(String _komment, int _suuma_doh, int _suuma_fakt, int _id, int _name_doh, int _new_plus, int _postoyan) {
         komment = _komment;
         suuma_doh = _suuma_doh;
         suuma_fakt = _suuma_fakt;

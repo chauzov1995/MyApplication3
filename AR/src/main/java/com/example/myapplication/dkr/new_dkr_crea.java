@@ -20,7 +20,8 @@ import android.widget.Toast;
 import com.example.myapplication.DB_sql;
 import com.example.myapplication.MyDialogFragment;
 import com.example.myapplication.R;
-import com.example.myapplication.dohod.dohod_red;
+import com.example.myapplication.dohod.dohod_redak;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -207,7 +208,7 @@ public class new_dkr_crea extends AppCompatActivity {
                     "Пора покормить кота!" + getIntent().getStringExtra("komment"), Toast.LENGTH_SHORT).show();
 
 
-            Intent intent = new Intent(this, dohod_red.class);
+            Intent intent = new Intent(this, dohod_redak.class);
             intent.putExtra("id", getIntent().getIntExtra("id", 0));
             intent.putExtra("summa", getIntent().getIntExtra("summa", 0));
             intent.putExtra("komment", getIntent().getStringExtra("komment"));
