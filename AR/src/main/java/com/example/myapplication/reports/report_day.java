@@ -52,7 +52,7 @@ public class report_day extends AppCompatActivity {
 
 
         c.close();
-        dodod_activity.loadhist(this);
+       // dodod_activity.loadhist(this);
 
 
         Log.d("asdas", "asdasd" + c.getCount());

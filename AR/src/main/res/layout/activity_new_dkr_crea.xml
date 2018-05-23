@@ -10,7 +10,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary" />
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="" />
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/frgmCont"
@@ -32,7 +34,7 @@
                 android:text="Сумма" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/summa_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -45,29 +47,11 @@
                 android:text="Комментарий" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/komment_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName" />
-
-            <Button
-                android:id="@+id/crea_dkr_save"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:background="@color/colorPrimary"
-                android:text="Изменить"
-                android:textColor="#ffffff" />
-
-            <Button
-                android:id="@+id/del_dkr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:background="@color/colorDelete"
-                android:text="Удалить"
-                android:textColor="#ffffff" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

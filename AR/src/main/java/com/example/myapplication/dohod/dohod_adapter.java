@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ public class dohod_adapter extends RecyclerView.Adapter<dohod_adapter.ViewHolder
 
 
     static ArrayList<dohod_class> objects;
-    static Activity getactivity;
+    static AppCompatActivity getactivity;
 
     // класс view holder-а с помощью которого мы получаем ссылку на каждый элемент
     // отдельного пункта списка
@@ -118,7 +119,7 @@ public class dohod_adapter extends RecyclerView.Adapter<dohod_adapter.ViewHolder
                                     db.execSQL("UPDATE `an_dohod` SET `visible`=1 WHERE" +
                                             " id='" + d.id + "'");
 
-                                    // getactivity.resume
+                                    // getactivity.load_spisDoh();
                                 }
                             });
                     AlertDialog alert = builder.create();
@@ -133,7 +134,7 @@ public class dohod_adapter extends RecyclerView.Adapter<dohod_adapter.ViewHolder
 
 
     // Конструктор
-    public dohod_adapter(ArrayList<dohod_class> _objects, Activity _getactivity) {
+    public dohod_adapter(ArrayList<dohod_class> _objects, AppCompatActivity _getactivity) {
         objects = _objects;
         getactivity = _getactivity;
     }
@@ -199,19 +200,12 @@ public class dohod_adapter extends RecyclerView.Adapter<dohod_adapter.ViewHolder
                         break;
                     case 2:
 
-                        if (p.postoyan == 1) {
-                            dohod_adapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_brown);
-                            holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
-                            holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
-                            holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
-                            holder.button4.setBackground(getactivity.getResources().getDrawable(R.drawable.btn_brown_item));
-                        } else {
-                            dohod_adapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_orage);
-                            holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
-                            holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
-                            holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
-                            holder.button4.setBackground(getactivity.getResources().getDrawable(R.drawable.btn_orange_item));
-                        }
+                        dohod_adapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_orage);
+                        holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
+                        holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
+                        holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_orage));
+                        holder.button4.setBackground(getactivity.getResources().getDrawable(R.drawable.btn_orange_item));
+
                         break;
                     case 3:
                         dohod_adapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_blue);
@@ -219,6 +213,14 @@ public class dohod_adapter extends RecyclerView.Adapter<dohod_adapter.ViewHolder
                         holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_blue));
                         holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_blue));
                         holder.button4.setBackground(getactivity.getResources().getDrawable(R.drawable.btn_blue_item));
+                        break;
+                    case 4:
+                        dohod_adapter.TintIcons.tintImageView((ImageView) holder.imageView, R.color.ri_brown);
+                        holder.tvText.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
+                        holder.textView4.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
+                        holder.textView6.setTextColor(getactivity.getResources().getColor(R.color.ri_brown));
+                        holder.button4.setBackground(getactivity.getResources().getDrawable(R.drawable.btn_brown_item));
+
                         break;
 
 
@@ -247,18 +249,9 @@ public class dohod_adapter extends RecyclerView.Adapter<dohod_adapter.ViewHolder
 
 
     void click_cart(dohod_class p) {
-
-
         Intent intent = new Intent(getactivity, new_dkr_crea.class);
-
-        intent.putExtra("id", p.id);
-        intent.putExtra("summa", p.suuma_doh);
-        intent.putExtra("komment", p.komment);
-        intent.putExtra("postoyan", p.postoyan);
-        intent.putExtra("name_doh", p.name_doh);
+        intent.putExtra("kuda", p.id);
         getactivity.startActivity(intent);
-
-
     }
 
 

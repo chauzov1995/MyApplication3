@@ -60,7 +60,7 @@ public class PageFragment extends Fragment {
 
 
         //  MainActivity.history.
-        dodod_activity.loadhist(getActivity());
+       // dodod_activity.loadhist(getActivity());
         ArrayList<history_class> poisk = new ArrayList<history_class>();
         int vsego_port = 0;
         for (history_class data : dodod_activity.history

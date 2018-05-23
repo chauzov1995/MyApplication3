@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.myapplication.DB_sql;
 import com.example.myapplication.R;
-import com.example.myapplication.dkr.red_dkr;
 import com.example.myapplication.dohod.dohod_redak;
 
 import java.util.ArrayList;
@@ -91,7 +90,7 @@ public class history_adapter extends BaseAdapter {
         histitem.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
 
-
+/*
                 Intent intent = new Intent(getactivity, red_dkr.class);
 
 
@@ -102,7 +101,7 @@ public class history_adapter extends BaseAdapter {
 
 
                 getactivity.startActivity(intent);
-
+*/
             }
         });
 

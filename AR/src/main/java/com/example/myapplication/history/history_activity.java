@@ -56,7 +56,7 @@ public class history_activity extends Fragment {
 
 
         c.close();
-        dodod_activity.loadhist(getActivity());
+       // dodod_activity.loadhist(getActivity());
 
 
         Log.d("asdas", "asdasd" + c.getCount());

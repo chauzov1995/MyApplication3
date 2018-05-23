@@ -90,21 +90,21 @@ public class dkr_hist_adapter extends BaseAdapter {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 
 
-                EditText editText = (EditText) getactivity.findViewById(R.id.editText);
-                EditText editText2 = (EditText) getactivity.findViewById(R.id.editText2);
+                EditText summa_edit = (EditText) getactivity.findViewById(R.id.summa_edit);
+                EditText komment_edit = (EditText) getactivity.findViewById(R.id.komment_edit);
 
 
                 int kuda = p.id;
-                int summa = Integer.parseInt(editText.getText().toString());
-                String komment = editText2.getText().toString();
+                int summa = Integer.parseInt(summa_edit.getText().toString());
+                String komment = komment_edit.getText().toString();
                 String data_fakt = date;
                 int name_doh = p.name_doh;
-                int postoyan = p.postoyan;
+               // int postoyan = p.postoyan;
 
                 db.execSQL("INSERT INTO `an_dkr_hist`" +
-                        " ( `kuda`, `summa`, `komment`, `data_fakt`, `visible`, `postoyan`, name_dohod)" +
+                        " ( `kuda`, `summa`, `komment`, `data_fakt`, `visible`,  name_dohod)" +
                         " VALUES" +
-                        " ( '" + kuda + "', '" + summa + "', '" + komment + "', '" + data_fakt + "', 0, '" + postoyan + "', '" + name_doh + "')");
+                        " ( '" + kuda + "', '" + summa + "', '" + komment + "', '" + data_fakt + "', 0, '" + name_doh + "')");
 
 
                 db.execSQL("UPDATE `an_dohod` SET" +
