@@ -1,9 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'chauzov'
+            keyPassword '1122123qQ'
+            storeFile file('C:/keys/key.jks')
+            storePassword '1122123qQ'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
-        applicationId 'com.example.Analizator'
+        applicationId 'com.nchauzov.analizator'
         minSdkVersion 22
         targetSdkVersion 27
         versionCode 1
@@ -16,6 +24,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     productFlavors {

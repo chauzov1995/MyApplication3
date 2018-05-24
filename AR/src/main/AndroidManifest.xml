@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myapplication">
+    package="com.nchauzov.analizator">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".dohod.dodod_activity"
+            android:name="com.nchauzov.analizator.dohod.dodod_activity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -20,15 +20,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".dohod.dohod_redak"
+            android:name="com.nchauzov.analizator.dohod.dohod_redak"
             android:label="Создаём" />
         <activity
-            android:name=".dkr.new_dkr_crea"
+            android:name="com.nchauzov.analizator.dkr.new_dkr_crea"
             android:label="На что потратились?" />
         <activity
-            android:name=".statistics.statistics"
+            android:name="com.nchauzov.analizator.statistics.statistics"
             android:label="Статистика" />
-        <activity android:name=".reports.reports_activity"></activity>
+        <activity android:name="com.nchauzov.analizator.reports.reports_activity"></activity>
     </application>
 
 </manifest>
