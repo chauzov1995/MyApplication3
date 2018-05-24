@@ -54,7 +54,7 @@ public class new_dkr_crea extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        kuda_intent = getIntent().getIntExtra("kuda", 0);
+
         id = getIntent().getIntExtra("id", 0);
 
         summa_edit = (EditText) findViewById(R.id.summa_edit);
@@ -71,12 +71,16 @@ public class new_dkr_crea extends AppCompatActivity {
                 // определяем номера столбцов по имени в выборке
                 int summa = c.getColumnIndex("summa");
                 int komment = c.getColumnIndex("komment");
+                int kuda = c.getColumnIndex("kuda");
 
                 komment_edit.setText(c.getString(komment));
                 summa_edit.setText(c.getString(summa));
-
+                kuda_intent=c.getInt(kuda);
             }
 
+        }else {
+
+            kuda_intent = getIntent().getIntExtra("kuda", 0);
         }
 
 
@@ -139,14 +143,14 @@ public class new_dkr_crea extends AppCompatActivity {
                     "`kuda`=" + kuda + ", " +
                     "`purse`=" + purse + ", " +
                     "`data_fakt`='" + data_fakt + "', " +
-                    "`summa`='" + summa + "', " +
-                    "`komment`=" + komment + " " +
+                    "`summa`=" + summa + ", " +
+                    "`komment`='" + komment + "' " +
                     "WHERE id=" + id);
         } else {
             db.execSQL("INSERT INTO `an_dkr_hist`" +
                     " ( `kuda`, `summa`, `komment`, `data_fakt`, `visible`, `purse`)" +
                     " VALUES" +
-                    " ( '" + kuda + "', '" + summa + "', '" + komment + "', '" + data_fakt + "', 0, 1)");
+                    " ( " + kuda + ", " + summa + ", '" + komment + "', '" + data_fakt + "', 0, 1)");
        }
 
 

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.myapplication.DB_sql;
 import com.example.myapplication.R;
+import com.example.myapplication.dkr.new_dkr_crea;
 import com.example.myapplication.dohod.dohod_redak;
 
 import java.util.ArrayList;
@@ -72,36 +73,25 @@ public class history_adapter extends BaseAdapter {
         TextView textView9 = (TextView) view.findViewById(R.id.textView9);
         LinearLayout histitem = (LinearLayout) view.findViewById(R.id.histitem);
 
-        // Button button=  (Button) view.findViewById(R.id.button);
+
         textView8.setText(p.komment);
         textView7.setText(p.nazv_doh);
 
-        switch (p.name_doh) {
-            case 1:
-                textView9.setTextColor(0xFF88bb55);
-                textView9.setText("+" + p.suuma + " р.");
-                break;
-            case 2:
-                textView9.setTextColor(0xFFff5555);
-                textView9.setText("-" + p.suuma + " р.");
-                break;
+        if (p.name_doh == 1) {
+
+            textView9.setTextColor(0xFF88bb55);
+            textView9.setText("+" + p.suuma + " р.");
+        } else {
+            textView9.setTextColor(0xFFff5555);
+            textView9.setText("-" + p.suuma + " р.");
+
         }
 
         histitem.setOnClickListener(new View.OnClickListener() {
             public void onClick(View r) {
-
-/*
-                Intent intent = new Intent(getactivity, red_dkr.class);
-
-
-                intent.putExtra("suuma", p.suuma);
-                intent.putExtra("komment", p.komment);
+                Intent intent = new Intent(getactivity, new_dkr_crea.class);
                 intent.putExtra("id", p.id);
-                intent.putExtra("data_fact", p.data_fact);
-
-
                 getactivity.startActivity(intent);
-*/
             }
         });
 

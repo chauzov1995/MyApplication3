@@ -81,9 +81,12 @@ public class dohod_redak extends AppCompatActivity {
                 // определяем номера столбцов по имени в выборке
                 int summa_dohod = c.getColumnIndex("summa_dohod");
                 int komment = c.getColumnIndex("komment");
+                int name_dohod = c.getColumnIndex("name_dohod");
                 // do {
                 doh_red_komment.setText(c.getString(komment));
                 doh_red_summa.setText(c.getString(summa_dohod));
+                spinner.setSelection(name_dohod==4?1:name_dohod-1);
+                checkBox.setChecked(name_dohod==4);
                 // } while (c.moveToNext());
             }
             doh_red_btn.setText("Сохранить");
@@ -144,7 +147,7 @@ public class dohod_redak extends AppCompatActivity {
                             "WHERE id=" + id_prihod);
                 } else {
                     db.execSQL("INSERT INTO `an_dohod`" +
-                            "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible` VALUES" +
+                            "( `name_dohod`, `summa_dohod`, `summa_fakt`, `komment`, `visible`) VALUES" +
                             " ('" + name_dohod + "','" + Integer.parseInt(doh_red_summa.getText().toString()) + "',0,'" + doh_red_komment.getText().toString() + "',0)");
 
                 }

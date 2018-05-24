@@ -1,7 +1,6 @@
 package com.example.myapplication.dohod;
 
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,17 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myapplication.DB_sql;
 import com.example.myapplication.R;
 import com.example.myapplication.history.history_class;
 
-import com.example.myapplication.reports.report_day;
-import com.example.myapplication.reports.statistics;
+import com.example.myapplication.reports.reports_activity;
+import com.example.myapplication.statistics.statistics;
 
 import java.util.ArrayList;
 
@@ -159,12 +155,15 @@ public class dodod_activity extends AppCompatActivity
 
         fTrans = getFragmentManager().beginTransaction();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.report_menu) {
 
-            Intent intent = new Intent(this, report_day.class);
+            Intent intent = new Intent(this, reports_activity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.statistics) {
+
+            Intent intent = new Intent(this, statistics.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_share) {
 
@@ -174,54 +173,6 @@ public class dodod_activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-/*
-    public static void loadhist(Context context) {
-
-        DB_sql dbHelper = new DB_sql(context);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        history.clear();
-
-
-        String startmes_time = "2018.05.1";
-        String endmes_time = "2018.05.31";
-
-
-        Cursor c = db.rawQuery("SELECT a.id, a.komment, a.summa_dohod, b.summa_fakt, a.name_dohod" +
-                "        FROM `an_dohod` a" +
-                "        LEFT JOIN (" +
-                "                SELECT SUM(summa) AS summa_fakt, kuda" +
-                "        FROM an_dkr_hist" +
-                "        WHERE visible=0 and data>=? and data<?" +
-                "        GROUP BY kuda) AS b" +
-                "        ON a.id = b.kuda" +
-                "        WHERE a.visible=0  ORDER by a.id ASC", new String[]{startmes_time, endmes_time});
-
-        if (c.moveToFirst()) {
-
-
-            int id = c.getColumnIndex("id");
-            int summa_dohod = c.getColumnIndex("summa_dohod");
-            int komment = c.getColumnIndex("komment");
-            int summa_fakt = c.getColumnIndex("summa_fakt");
-            int name_dohod = c.getColumnIndex("name_dohod");
-
-
-            do {
-                history.add(new history_class(c.getInt(id), c.getString(komment), c.getInt(summa_dohod),
-                        c.getString(summa_fakt), c.getInt(name_dohod));
-                // переход на следующую строку
-                // а если следующей нет (текущая - последняя), то false - выходим из цикла
-            } while (c.moveToNext());
-        }
-
-        c.close();
-
-        //  Toast.makeText(getActivity(), "Возможно вы правы", Toast.LENGTH_LONG).show();
-
-    }
-
-*/
 }
 
 

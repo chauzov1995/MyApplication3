@@ -20,18 +20,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".dohod.dohod_red"
-            android:label="Редактируем" />
-        <activity
             android:name=".dohod.dohod_redak"
             android:label="Создаём" />
         <activity
             android:name=".dkr.new_dkr_crea"
             android:label="На что потратились?" />
         <activity
-            android:name=".dkr.red_dkr"
-            android:label="На что потратились?" />
-        <activity android:name=".reports.report_day"></activity>
+            android:name=".statistics.statistics"
+            android:label="Статистика" />
+        <activity android:name=".reports.reports_activity"></activity>
     </application>
 
 </manifest>
